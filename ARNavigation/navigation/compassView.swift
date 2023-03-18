@@ -43,7 +43,6 @@ struct compassView: View {
             let fileUrl = URL(fileURLWithPath: urlString)
             let data1=readTxt(name:"direction.txt", fileBaseUrl: fileUrl)
             let data2=readTxt(name:"Nodes.txt", fileBaseUrl: fileUrl)
-            print(pathName)
             let savedHeading=Double(data1)!
             let myline:[String]=data2.components(separatedBy: "\n")
             //记录长度
