@@ -12,45 +12,20 @@ struct ContentView: View,TableViewDelegate {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    //list
+    //MARK: - 列表参数
     @ObservedObject var mutableData = MyData(["default"])
-    //@State var inputField: String = ""
     @State var isScrolling: Bool = false
     @State var detailViewActive = false
     @State var detailViewName = "default"
     @State var isLoading = false
     @State var filename:[String]=[]
     
-    //add name
+    //MARK: - 添加路径参数
     @State var shown = false
     @State var text = ""
     @State var isDone = false
-
-    
     var total = 2
-    
-    func supplyMoreData() {
-        isLoading = true
-        var i=0
         
-        let manger=FileManager.default
-        let urlString=NSHomeDirectory()+"/Documents/"
-        do{
-            let cintents1 = try manger.contentsOfDirectory(atPath: urlString)
-            for word in cintents1
-            {
-                i+=1
-                filename.append(word)
-                
-            }
-        }
-        catch{
-                    print("Error occurs.")
-        }
-        mutableData.append(contentsOf: filename)
-        isLoading = false
-    }
-    
     var body: some View {
         ZStack{
             ZStack{
@@ -102,6 +77,28 @@ struct ContentView: View,TableViewDelegate {
         self.shown = true
     }
     
+    func supplyMoreData() {
+        isLoading = true
+        var i=0
+        
+        let manger=FileManager.default
+        let urlString=NSHomeDirectory()+"/Documents/"
+        do{
+            let cintents1 = try manger.contentsOfDirectory(atPath: urlString)
+            for word in cintents1
+            {
+                i+=1
+                filename.append(word)
+                
+            }
+        }
+        catch{
+                    print("Error occurs.")
+        }
+        mutableData.append(contentsOf: filename)
+        isLoading = false
+    }
+    
     func onScroll(_ tableView: TableView, isScrolling: Bool) {
         withAnimation {
             self.isScrolling = isScrolling
@@ -125,7 +122,6 @@ struct ContentView: View,TableViewDelegate {
         if index != 0{
             returnName = filename[index-1]
         }
-        //print("Tapped on record \(returnName)")
         self.detailViewName = returnName
         self.detailViewActive.toggle()
     }
@@ -137,7 +133,6 @@ struct ContentView: View,TableViewDelegate {
     }
     
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

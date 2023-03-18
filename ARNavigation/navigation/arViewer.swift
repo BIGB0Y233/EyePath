@@ -27,7 +27,6 @@ struct arViewer: View{
     @Binding var length: Int
     @Binding var deltaNorth:[Float]
 
-
         var body: some View {
             ZStack{
                 ARViewContainer(timer: $timer, stopFlag: $stopFlag, length: $length, modelPos: $modelPos, modelName: $modelName, deltaNorth: $deltaNorth,currentCoordinate: $currentCoordinate, nextCoordinate: $nextCoordinate, distance: $distance, index: $index).edgesIgnoringSafeArea(.all)

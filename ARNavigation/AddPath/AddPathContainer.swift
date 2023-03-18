@@ -12,7 +12,7 @@ import CoreLocation
 
 struct AddPathContainer: UIViewRepresentable
 {
-
+    //MARK: - 进程控制
     @Binding var timer: Timer?
     @Binding var stopFlag: Bool
     
@@ -23,7 +23,7 @@ struct AddPathContainer: UIViewRepresentable
     @Binding var createNode: Bool
     @Binding var modelName: String
 
-     var manager : CLLocationManager = CLLocationManager()
+    var manager : CLLocationManager = CLLocationManager()
 
     func makeUIView(context: Context) -> ARView {
 

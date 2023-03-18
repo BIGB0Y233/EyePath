@@ -16,6 +16,7 @@ struct AddPathView: View {
         @State var createNode = false
         @State var modelName = "straight"
     
+//MARK: - 进程控制
         @State var timer: Timer?
         @State var stopFlag = false
 

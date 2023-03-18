@@ -91,7 +91,6 @@ struct ARViewContainer: UIViewRepresentable{
         }
 
     }
-
 }
 
 class customEntity:Entity,HasModel,HasAnchoring{

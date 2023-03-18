@@ -10,7 +10,6 @@ import CoreLocation
 import ARKit
 import RealityKit
 
-
 struct compassView: View {
     
     @State var timer: Timer?
@@ -27,7 +26,6 @@ struct compassView: View {
     @State var modelPos:[SIMD3<Float>]=[]   //模型坐标
     @State var deltaNorth:[Float]=[]    //磁力计角度差
     @State var ModelName:[String]=[]    //模型名称
-
 
     var body: some View {
         ZStack{
