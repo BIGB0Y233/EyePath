@@ -43,6 +43,7 @@ struct compassView: View {
             let fileUrl = URL(fileURLWithPath: urlString)
             let data1=readTxt(name:"direction.txt", fileBaseUrl: fileUrl)
             let data2=readTxt(name:"Nodes.txt", fileBaseUrl: fileUrl)
+            print(pathName)
             let savedHeading=Double(data1)!
             let myline:[String]=data2.components(separatedBy: "\n")
             //记录长度
@@ -89,7 +90,6 @@ struct compassView: View {
             
 //MARK: -// 启动计时器判断是否开始
             timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                //print("????????????????????????????")
                 currentHeading = manager.heading?.trueHeading ?? 0.0
                 //目前的磁力计角度与第一个点的角度之差
                 let delta = (currentHeading - savedHeading + 180).truncatingRemainder(dividingBy: 360) - 180

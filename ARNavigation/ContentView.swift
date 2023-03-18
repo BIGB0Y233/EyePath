@@ -18,13 +18,14 @@ struct ContentView: View,TableViewDelegate {
     @State var detailViewActive = false
     @State var detailViewName = "default"
     @State var isLoading = false
-    @State var filename:[String]=[]
+    @State var filename:[String]=["default"]
     
     //MARK: - 添加路径参数
     @State var shown = false
-    @State var text = ""
+    @State var text = "untitled"
     @State var isDone = false
-    var total = 2
+   // var total = 2
+ 
         
     var body: some View {
         ZStack{
@@ -37,13 +38,7 @@ struct ContentView: View,TableViewDelegate {
                         }
                         
                         VStack {
-                            TextField("Saved", text: Binding(get: {
-                                return ""
-                            }, set: { (newValue) in
-                                // self.inputField = newValue
-                                self.mutableData.append(newValue)
-                            }))
-                            
+                            Text("Saved")
                             Divider()
                             
                             TableView(dataSource: self.mutableData as TableViewDataSource, delegate: self )
@@ -53,11 +48,13 @@ struct ContentView: View,TableViewDelegate {
                         
                     }.navigationBarTitle("Choose a Path")
                         .toolbar {
-#if os(iOS)
+//#if os(iOS)
                             ToolbarItem(placement: .navigationBarTrailing) {
-                                EditButton()
+                                Button(action: deletePath) {
+                                    Label("delete Item", systemImage: "minus")
+                                }
                             }
-#endif
+//#endif
                             ToolbarItem {
                                 Button(action: addPath) {
                                     Label("Add Item", systemImage: "plus")
@@ -68,16 +65,26 @@ struct ContentView: View,TableViewDelegate {
                 
                 if self.shown{
                     alertView(text: $text, shown: $shown,isDone: $isDone)
+//                        .onDisappear{
+//                        self.supplyMoreData()
+//                    }
                 }
             }.navigate(to: AddPathView(pathName: $text), when: $isDone)
-        }
+        }.onAppear{
+            supplyData()
+        }.navigationBarBackButtonHidden(true)
     }
     //MARK: - TableViewDelegate Functions
     private func addPath() {
         self.shown = true
     }
     
-    func supplyMoreData() {
+    private func deletePath() {
+       // supplyData()
+        print(filename)
+    }
+    
+    func supplyData() {
         isLoading = true
         var i=0
         
@@ -88,16 +95,45 @@ struct ContentView: View,TableViewDelegate {
             for word in cintents1
             {
                 i+=1
-                filename.append(word)
-                
+                    filename.append(word)
             }
         }
         catch{
                     print("Error occurs.")
         }
-        mutableData.append(contentsOf: filename)
+
+        let set1 = Set(mutableData.mutableData)
+        let set2 = Set(filename)
+        let differentElements = set1.symmetricDifference(set2)
+        
+        mutableData.append(contentsOf: Array(differentElements))
         isLoading = false
     }
+    
+//    func supplyMoreData() {
+//        isLoading = true
+//        var i=0
+//
+//        let manger=FileManager.default
+//        let urlString=NSHomeDirectory()+"/Documents/"
+//        var newFileName:[String]=[]
+//        do{
+//            let cintents1 = try manger.contentsOfDirectory(atPath: urlString)
+//            for word in cintents1
+//            {
+//                i+=1
+//                if !filename.contains(word) {
+//                    filename.append(word)
+//                    newFileName.append(word)
+//                }
+//            }
+//        }
+//        catch{
+//                    print("Error occurs.")
+//        }
+//        mutableData.append(contentsOf: newFileName)
+//        isLoading = false
+//    }
     
     func onScroll(_ tableView: TableView, isScrolling: Bool) {
         withAnimation {
@@ -106,18 +142,16 @@ struct ContentView: View,TableViewDelegate {
     }
     
     func onAppear(_ tableView: TableView, at index: Int) {
-        
-        if index+5 > self.mutableData.count() && self.mutableData.count() < self.total && !self.isLoading {
-            //print("*** NEED TO SUPPLY MORE DATA ***")
 
-            self.supplyMoreData()
-        }
-         
+//        if index+5 > self.mutableData.count() && self.mutableData.count() < self.total && !self.isLoading {
+//            print("*** NEED TO SUPPLY MORE DATA ***")
+//            supplyData()
+//            //print(filename)
+//        }
+        
     }
     
     func onTapped(_ tableView: TableView, at index: Int) {
-        
-        //print("Tapped on record \(index)")
         var returnName = "default"
         if index != 0{
             returnName = filename[index-1]

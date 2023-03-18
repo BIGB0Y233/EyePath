@@ -44,6 +44,7 @@ struct AddPathContainer: UIViewRepresentable
         var originalNorth = 0.0 //初始方向
 
         //MARK: -// 启动计时器记录位置
+        DispatchQueue.main.async {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
             let trueNorth = manager.heading!.trueHeading
             if createNode{
@@ -65,9 +66,7 @@ struct AddPathContainer: UIViewRepresentable
                 createNode = false
             }
         }
-//        DispatchQueue.main.async {
-//
-//        }
+        }
         return arView
     }
 

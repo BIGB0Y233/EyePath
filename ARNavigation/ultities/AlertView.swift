@@ -24,7 +24,6 @@ struct alertView: View{
                     Button(action: {
                         self.shown.toggle()
                         self.isDone = true
-                        print(self.text)
                     }) {
                         Text("Done")
                     }

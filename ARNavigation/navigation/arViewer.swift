@@ -42,7 +42,7 @@ struct arViewer: View{
                     timer = nil
                     }
                 }
-            }.navigate(to: ContentView(), when: $stopFlag ).navigationBarBackButtonHidden(true)
+            }.navigate(to: ContentView(), when: $stopFlag).navigationBarBackButtonHidden(true)
     }
 
 struct arViewer_Previews: PreviewProvider {

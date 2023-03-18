@@ -70,7 +70,7 @@ struct ARViewContainer: UIViewRepresentable{
         if distance  < 0.5 {
             self.index += 1
             if index == length{
-                print("arrived")
+                //print("arrived")
                         timer?.invalidate()
                         timer = nil
                 }
