@@ -9,6 +9,7 @@ import SwiftUI
 import ARKit
 import RealityKit
 import CoreLocation
+import CoreData
 
 struct AddPathContainer: UIViewRepresentable
 {
@@ -21,8 +22,10 @@ struct AddPathContainer: UIViewRepresentable
     @Binding var pathName: String
     @Binding var createNode: Bool
     @Binding var modelName: String
+    @Binding var pathLength: Int
 
     var manager : CLLocationManager = CLLocationManager()
+    @Environment(\.managedObjectContext) private var viewContext
 
     func makeUIView(context: Context) -> ARView {
 
@@ -33,77 +36,75 @@ struct AddPathContainer: UIViewRepresentable
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingHeading()
 
-        //创建文件
-        let urlString=NSHomeDirectory()+"/Documents/\(pathName)"
-        createFolder(baseUrl: urlString)
-        let fileUrl = URL(fileURLWithPath: urlString)
-        createTxt(name:"Nodes.txt", fileBaseUrl: fileUrl)
-        createTxt(name:"direction.txt", fileBaseUrl: fileUrl)
-
-        var originalNorth = 0.0 //初始方向
-        var number: Int = 0
-        //MARK: -// 启动计时器记录位置
+        //MARK: - 读取路径文件，启动计时器写入记录位置
         DispatchQueue.main.async {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-            let trueNorth = manager.heading!.trueHeading
-            if createNode{
-                number += 1
-                if number == 1 {
-                    originalNorth = trueNorth
-                    write(string: String(format: "%f",originalNorth), name: "direction.txt",docPath: fileUrl)
-                }
-                let Xcoord = arView.cameraTransform.translation.x
-               // let Ycoord = arView.cameraTransform.translation.y     //高度记录
-                let Zcoord = arView.cameraTransform.translation.z
-                
-                //方向角度差
-                let delta = (trueNorth - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
-                let deltaNorth = delta < -180 ? delta + 360 : delta
+            var originalNorth = 0.0 //初始方向
+            var number: Int = 0 //计数
+            //创建文件
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
+            fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
+            do {
+                let writingPath = try viewContext.fetch(fetchRequest).first!
+                timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                    let trueNorth = manager.heading!.trueHeading
+                    if createNode{
+                        number += 1
+                        if number == 1 {
+                            //保存初始方向
+                            originalNorth = trueNorth
+                            writingPath.setValue(originalNorth, forKey: "initdirection")
+                            if writingPath.value(forKey: "initdirection") is NSNumber {
+                                writingPath.setValue(originalNorth, forKey: "initdirection")
+                            }
+                        }
+                        
+                        let Xcoord = NSNumber(value:arView.cameraTransform.translation.x)
+                        let Zcoord = NSNumber(value:arView.cameraTransform.translation.z)
+                        // let Ycoord = NSNumber(value:arView.cameraTransform.translation.y)     //高度记录
+                        
+                        //方向角度差
+                        let delta = (trueNorth - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
+                        let deltaNorth = delta < -180 ? delta + 360 : delta
+                        let nsNorth = NSNumber(value: deltaNorth)
+                        //坐标
+                        if var coordStack = writingPath.value(forKey: "position") as? [[NSNumber]] {
+                            coordStack.append([Xcoord,-0.5,Zcoord])
+                            writingPath.setValue(coordStack, forKey: "position")
+                        }
+                        //角度偏差
+                        if var angleStack = writingPath.value(forKey: "anglediff") as? [NSNumber] {
+                            angleStack.append(nsNorth)
+                            writingPath.setValue(angleStack, forKey: "anglediff")
+                        }
+                        //路径点方向
+                        if var directionStack = writingPath.value(forKey: "direction") as? [String] {
+                            directionStack.append(modelName)
+                            writingPath.setValue(directionStack, forKey: "direction")
+                        }
 
-                returndata = String(Xcoord)+" "+String(-0.5)+" "+String(Zcoord)+" "+String(format: "%f",deltaNorth)+" "+modelName+"\n"
-                write(string: returndata, name: "Nodes.txt",docPath: fileUrl)
-                createNode = false
+                        createNode = false
+                    }
+                }
+            } catch let error as NSError {
+                print("path fetching failed!")
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
-        }
         return arView
-    }
-
-    func createTxt(name:String, fileBaseUrl:URL){
-        let manager = FileManager.default
-        let file = fileBaseUrl.appendingPathComponent(name)
-        print("文件: \(file)")
-        let exist = manager.fileExists(atPath: file.path)
-        if !exist {
-            let data = Data(base64Encoded:"",options:.ignoreUnknownCharacters)
-            let createSuccess = manager.createFile(atPath: file.path,contents:data,attributes:nil)
-            print("文件创建结果: \(createSuccess)")
-        }
-    }
-
-    func createFolder(baseUrl:String)
-    {   let manager = FileManager.default
-        let exist = manager.fileExists(atPath: baseUrl)
-        if !exist{
-        do {try manager.createDirectory(atPath: baseUrl, withIntermediateDirectories: true, attributes: nil)}
-        catch{print("error to create folder!")}
-    }
-    }
-
-    func write(string:String,name:String,docPath:URL){
-        let file = docPath.appendingPathComponent(name)
-        let appendedData = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
-        let writeHandler = try? FileHandle(forWritingTo:file)
-        writeHandler?.seekToEndOfFile()
-        writeHandler?.write(appendedData!)
     }
 
     func updateUIView(_ uiView: ARView, context: Context) {
         if stopFlag==true {
             uiView.session.pause()
+            do {
+                try viewContext.save()
+                print("保存成功")
+            } catch let error as NSError {
+                print("writing failed!")
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
         }
 }
-
 
 }
 

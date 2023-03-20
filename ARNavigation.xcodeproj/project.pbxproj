@@ -26,6 +26,9 @@
 		430A438B29C6DF6A00652B12 /* 三.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437929C6DF6A00652B12 /* 三.wav */; };
 		430A438C29C6DF6A00652B12 /* 四.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437A29C6DF6A00652B12 /* 四.wav */; };
 		430A438D29C6DF6A00652B12 /* 九.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437B29C6DF6A00652B12 /* 九.wav */; };
+		430A440D29C8490000652B12 /* Path+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A440B29C8490000652B12 /* Path+CoreDataClass.swift */; };
+		430A440E29C8490000652B12 /* Path+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A440C29C8490000652B12 /* Path+CoreDataProperties.swift */; };
+		430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441029C84F3700652B12 /* AddPathNameView.swift */; };
 		4363453929B892DD00ACFA23 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4363453829B892DD00ACFA23 /* TableViewCell.xib */; };
 		438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A329B87B5600A4E59C /* ARNavigationApp.swift */; };
 		438695A629B87B5600A4E59C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A529B87B5600A4E59C /* Persistence.swift */; };
@@ -85,6 +88,9 @@
 		430A437929C6DF6A00652B12 /* 三.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "三.wav"; sourceTree = "<group>"; };
 		430A437A29C6DF6A00652B12 /* 四.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "四.wav"; sourceTree = "<group>"; };
 		430A437B29C6DF6A00652B12 /* 九.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "九.wav"; sourceTree = "<group>"; };
+		430A440B29C8490000652B12 /* Path+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataClass.swift"; sourceTree = "<group>"; };
+		430A440C29C8490000652B12 /* Path+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		430A441029C84F3700652B12 /* AddPathNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPathNameView.swift; sourceTree = "<group>"; };
 		4363453829B892DD00ACFA23 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		4363453A29C1800A00ACFA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		438695A029B87B5600A4E59C /* ARNavigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARNavigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,17 +143,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		430A436829C6DE5D00652B12 /* Model */ = {
+		430A436829C6DE5D00652B12 /* ARModel */ = {
 			isa = PBXGroup;
 			children = (
 				430A433D29C6D81B00652B12 /* left.reality */,
 				430A433E29C6D81B00652B12 /* right.reality */,
 				430A433F29C6D81B00652B12 /* straight.reality */,
 			);
-			path = Model;
+			path = ARModel;
 			sourceTree = "<group>";
 		};
-		430A436929C6DF6A00652B12 /* sounds */ = {
+		430A436929C6DF6A00652B12 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
 				430A436A29C6DF6A00652B12 /* 米.wav */,
@@ -167,7 +173,16 @@
 				430A437A29C6DF6A00652B12 /* 四.wav */,
 				430A437B29C6DF6A00652B12 /* 九.wav */,
 			);
-			path = sounds;
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		430A440F29C8496200652B12 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				430A440B29C8490000652B12 /* Path+CoreDataClass.swift */,
+				430A440C29C8490000652B12 /* Path+CoreDataProperties.swift */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		4386959729B87B5600A4E59C = {
@@ -193,15 +208,16 @@
 		438695A229B87B5600A4E59C /* ARNavigation */ = {
 			isa = PBXGroup;
 			children = (
-				4363453A29C1800A00ACFA23 /* Info.plist */,
-				430A436929C6DF6A00652B12 /* sounds */,
-				430A436829C6DE5D00652B12 /* Model */,
+				430A440F29C8496200652B12 /* DataModel */,
+				430A436929C6DF6A00652B12 /* Sounds */,
+				430A436829C6DE5D00652B12 /* ARModel */,
+				438695E229B885B400A4E59C /* AddPath */,
+				438695D429B885B400A4E59C /* Navigation */,
+				438695DB29B885B400A4E59C /* Utilities */,
 				438695A329B87B5600A4E59C /* ARNavigationApp.swift */,
 				438695A529B87B5600A4E59C /* Persistence.swift */,
 				438695AA29B87B5600A4E59C /* ContentView.swift */,
-				438695E229B885B400A4E59C /* AddPath */,
-				438695D429B885B400A4E59C /* navigation */,
-				438695DB29B885B400A4E59C /* ultities */,
+				4363453A29C1800A00ACFA23 /* Info.plist */,
 				438695AC29B87B5800A4E59C /* Assets.xcassets */,
 				4363453829B892DD00ACFA23 /* TableViewCell.xib */,
 				438695AE29B87B5800A4E59C /* ARNavigation.entitlements */,
@@ -236,17 +252,17 @@
 			path = ARNavigationUITests;
 			sourceTree = "<group>";
 		};
-		438695D429B885B400A4E59C /* navigation */ = {
+		438695D429B885B400A4E59C /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
 				438695D629B885B400A4E59C /* compassView.swift */,
 				438695D729B885B400A4E59C /* arViewer.swift */,
 				438695D929B885B400A4E59C /* ARViewContainer.swift */,
 			);
-			path = navigation;
+			path = Navigation;
 			sourceTree = "<group>";
 		};
-		438695DB29B885B400A4E59C /* ultities */ = {
+		438695DB29B885B400A4E59C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				438695DC29B885B400A4E59C /* BlurView.swift */,
@@ -255,7 +271,7 @@
 				438695DF29B885B400A4E59C /* TableView.swift */,
 				438695E029B885B400A4E59C /* AlertView.swift */,
 			);
-			path = ultities;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		438695E229B885B400A4E59C /* AddPath */ = {
@@ -263,6 +279,7 @@
 			children = (
 				438695E329B885B400A4E59C /* AddPathContainer.swift */,
 				438695E429B885B400A4E59C /* AddPathView.swift */,
+				430A441029C84F3700652B12 /* AddPathNameView.swift */,
 			);
 			path = AddPath;
 			sourceTree = "<group>";
@@ -417,9 +434,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				430A440E29C8490000652B12 /* Path+CoreDataProperties.swift in Sources */,
 				438695F329B885B400A4E59C /* AddPathContainer.swift in Sources */,
 				438695A929B87B5600A4E59C /* ARNavigation.xcdatamodeld in Sources */,
 				438695E829B885B400A4E59C /* compassView.swift in Sources */,
+				430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */,
 				438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */,
 				438695AB29B87B5600A4E59C /* ContentView.swift in Sources */,
 				438695EB29B885B400A4E59C /* ARViewContainer.swift in Sources */,
@@ -429,6 +448,7 @@
 				438695E929B885B400A4E59C /* arViewer.swift in Sources */,
 				438695EF29B885B400A4E59C /* TableViewCell.swift in Sources */,
 				438695F429B885B400A4E59C /* AddPathView.swift in Sources */,
+				430A440D29C8490000652B12 /* Path+CoreDataClass.swift in Sources */,
 				438695EE29B885B400A4E59C /* soundProcess.swift in Sources */,
 				438695A629B87B5600A4E59C /* Persistence.swift in Sources */,
 			);

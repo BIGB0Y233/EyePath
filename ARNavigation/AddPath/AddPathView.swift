@@ -20,15 +20,14 @@ struct AddPathView: View {
     //MARK: - 进程控制
     @State var timer: Timer?
     @State var stopFlag = false
-    @State private var showAlert = false
-    @State private var result = "Nothing Saved!"
+    @State private var result = ""
     @State private var navigateToNextView = false
     
     @Binding var pathName: String
     
     var body: some View {
         ZStack{
-            AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: $pathName, createNode: $createNode, modelName: $modelName).edgesIgnoringSafeArea(.all)
+            AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: $pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength).edgesIgnoringSafeArea(.all)
             
             ZStack{
                 blurView(style: .light).frame(width: 400, height: 300, alignment: .center)
@@ -56,30 +55,22 @@ struct AddPathView: View {
                         stopFlag = true
                         timer?.invalidate()
                         timer = nil
-                        showAlert = true
-                        if pathLength<2{
-                            result = "路径点小于2，保存失败!!!"
-                            let fileManager = FileManager.default
-                            let folderPath = NSHomeDirectory()+"/Documents/\(pathName)"
-                            do {
-                                try fileManager.removeItem(atPath: folderPath)
-                                print("成功删除")
-                            } catch {
-                                print("Error deleting folder: \(error.localizedDescription)")
-                            }
+                        if pathLength<1{
+                            result = "路径点小于1,路径无效，已删除❌！"
+                            //删除文件
                         }
                         else{
-                            result = "保存成功!"
+                            result = "保存成功✅!"
                         }
                     }
-                }.alert(isPresented: $showAlert) {
-                    Alert(title: Text(result), message: Text("记录完毕"), dismissButton: .default(Text("ok")) {
+                }.alert(isPresented: $stopFlag) {
+                    Alert(title: Text(result), message: Text("记录完毕"), dismissButton: .default(Text("Ok")) {
                         navigateToNextView = true
                     })
                 }
                 NavigationLink(destination: ContentView(), isActive: $navigateToNextView) { EmptyView() }
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

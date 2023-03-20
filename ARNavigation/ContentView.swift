@@ -9,124 +9,83 @@ import SwiftUI
 import CoreData
 import AVFoundation
 
-struct ContentView: View,TableViewDelegate {
+struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    
-    //MARK: - 列表参数
-    @ObservedObject var mutableData = MyData(["default"])
-    @State var isScrolling: Bool = false
-    @State var detailViewActive = false
-    @State var detailViewName = "default"
-    @State var isLoading = false
-
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Path.timestamp, ascending: true)],
+        animation: .default)
+    private var myPath: FetchedResults<Path>
     
     //MARK: - 添加路径参数
-    @State var shown = false
+    @State private var gotoAdd = false
     @State var text = "untitled"
     @State var isDone = false
         
     var body: some View {
         ZStack{
             ZStack{
-                NavigationView {
-                    ZStack {
-                        
-                        NavigationLink(destination: compassView(pathName: $detailViewName), isActive: $detailViewActive) {
-                            EmptyView()
-                        }
-                        
-                        VStack {
-                            Text("Saved")
-                            Divider()
-                            
-                            TableView(dataSource: self.mutableData as TableViewDataSource, delegate: self )
-                        }
-                        .padding()
-                        .edgesIgnoringSafeArea(.bottom)
-                        
-                    }.navigationBarTitle("Choose a Path")
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                Button(action: deletePath) {
-                                    Label("delete Item", systemImage: "minus")
-                                }
-                            }
-                            ToolbarItem {
-                                Button(action: addPath) {
-                                    Label("Add Item", systemImage: "plus")
-                                }
-                            }
-                        }
+                NavigationLink(destination: AddPathNameView(), isActive: $gotoAdd) {
+                    EmptyView()
                 }
-                
-                if self.shown{
-                    alertView(text: $text, shown: $shown,isDone: $isDone)
+                //                        NavigationLink(destination: compassView(pathName: $detailViewName), isActive: $detailViewActive) {
+                //                            EmptyView()
+                //                        }
+                NavigationView
+                {
+                    List {
+                        ForEach(myPath) { path in
+                            NavigationLink {
+                                Text(String(path.initdirection?.floatValue ?? 114.14))
+                                Text(path.anglediff?.last?.stringValue ?? "114514")
+                                Text(path.position?.last?.last?.stringValue ?? "114524")
+                                Text(path.direction?.last ?? "114534")
+                            } label: {
+                                Text(path.pathname ?? "114")
+                            }
+                        }
+                        .onDelete(perform: deletePath)
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            EditButton()
+                        }
+                        ToolbarItem {
+                            Button(action: {gotoAdd = true}) {
+                                Label("Add Item", systemImage: "plus")
+                            }
+                        }
+                    }
+                    .navigationTitle("已保存路径")
                 }
             }.navigate(to: AddPathView(pathName: $text), when: $isDone)
-        }.onAppear{
-            //supplyData()
         }.navigationBarBackButtonHidden(true)
     }
     //MARK: - TableViewDelegate Functions
-    private func addPath() {
-        self.shown = true
-    }
     
-    private func deletePath() {
-    }
-    
-    func supplyData() {
-        isLoading = true
-        var i=0
-        var filename:[String]=[]
-        let manger=FileManager.default
-        let urlString=NSHomeDirectory()+"/Documents/"
-        do{
-            let cintents1 = try manger.contentsOfDirectory(atPath: urlString)
-            for word in cintents1
-            {
-                i+=1
-                    filename.append(word)
+    private func deletePath(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { myPath[$0] }.forEach(viewContext.delete)
+
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
-        catch{
-                    print("Error occurs.")
-        }
-        mutableData.append(contentsOf: filename)
-        isLoading = false
-    }
-    
-    func onScroll(_ tableView: TableView, isScrolling: Bool) {
-        withAnimation {
-            self.isScrolling = isScrolling
-        }
-    }
-    
-    func onAppear(_ tableView: TableView, at index: Int) {
-        if index+5 > self.mutableData.count() && self.mutableData.count() < 2 && !self.isLoading {
-            print("*** NEED TO SUPPLY MORE DATA ***")
-            supplyData()
-        }
-        
-    }
-    
-    func onTapped(_ tableView: TableView, at index: Int) {
-        var returnName = "default"
-        if index != 0{
-            returnName = mutableData.mutableData[index]
-        }
-        print("taped on \(returnName)")
-        self.detailViewName = returnName
-        self.detailViewActive.toggle()
-    }
-    // this could be a view modifier but I do not think there is a way to read the view modifier
-    // from a UIViewRepresentable (yet).
-    func heightForRow(_ tableView: TableView, at index: Int) -> CGFloat {
-        return 64.0
     }
     
 }
+
+private let itemFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .medium
+    return formatter
+}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -134,25 +93,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-class MyData: TableViewDataSource, ObservableObject {
-    @Published var mutableData = [String]()
-    
-    func count() -> Int {
-        return mutableData.count
-    }
-    func titleForRow(row: Int) -> String {
-        return mutableData[row]
-    }
-    func subtitleForRow(row: Int) -> String? {
-        return "导航路线"
-    }
-    init(_ someData: [String]) {
-        mutableData.append(contentsOf: someData)
-    }
-    func append(contentsOf data: [String]) {
-        mutableData.append(contentsOf: data)
-    }
-    func append(_ single: String) {
-        mutableData.append(single)
-    }
-}
