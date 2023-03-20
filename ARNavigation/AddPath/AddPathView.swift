@@ -38,7 +38,7 @@ struct AddPathView: View {
                             modelName = "left"
                             pathLength+=1
                         }
-                        ){Image(systemName: "arrow.left")}.frame(width: 50, height: 50).background(Color.white)
+                        ){Image(systemName: "arrow.left")}.frame(width: 50, height: 50).background(Color.gray)
                         Button(action: {createNode=true
                             modelName = "straight"
                             pathLength+=1

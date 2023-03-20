@@ -29,75 +29,77 @@ struct compassView: View {
 
     var body: some View {
         ZStack{
-
+            
             NavigationLink(destination: arViewer(modelPos: $modelPos, modelName: $ModelName, length: $length, deltaNorth: $deltaNorth), isActive: $shouldStart) {
                 EmptyView()
             }
-
-        Text(String(diff)).onAppear{
-            self.manager.requestWhenInUseAuthorization()
-            self.manager.startUpdatingHeading()
-            
-//MARK: - 读取路线数据
-            let urlString=NSHomeDirectory()+"/Documents/"+pathName
-            let fileUrl = URL(fileURLWithPath: urlString)
-            let data1=readTxt(name:"direction.txt", fileBaseUrl: fileUrl)
-            let data2=readTxt(name:"Nodes.txt", fileBaseUrl: fileUrl)
-            let savedHeading=Double(data1)!
-            let myline:[String]=data2.components(separatedBy: "\n")
-            //记录长度
-            var num=1
-            for _ in myline{
-                num+=1
-            }
-            var temp=1
-            for line in myline
-            {
-                temp+=1
-                if temp>num-1{
-                    break
-                }
-                let myword:[String]=line.components(separatedBy: " ")
-                var num=0
-                var data_now:[Float]=[]
-                for num_now in myword
-                {
+            VStack{
+            Text("调整设备角度直到以下数值为0")
+            Text(String(diff)).onAppear{
+                self.manager.requestWhenInUseAuthorization()
+                self.manager.startUpdatingHeading()
+                
+                //MARK: - 读取路线数据
+                let urlString=NSHomeDirectory()+"/Documents/"+pathName
+                let fileUrl = URL(fileURLWithPath: urlString)
+                let data1=readTxt(name:"direction.txt", fileBaseUrl: fileUrl)
+                let data2=readTxt(name:"Nodes.txt", fileBaseUrl: fileUrl)
+                let savedHeading=Double(data1)!
+                let myline:[String]=data2.components(separatedBy: "\n")
+                //记录长度
+                var num=1
+                for _ in myline{
                     num+=1
-                    //1，2，3为坐标
-                    if num<4{
-                        let now:Float
-                        now=Float(num_now) ?? 1.0
-                        data_now.append(now)
-                    }
-                    //4为磁力计方向
-                    if(num==4)
-                    {
-                        let now:Float
-                        now=Float(num_now) ?? 1.0
-                        deltaNorth.append(now)
-                    }
-                    //5为导航方向
-                    if num>4
-                    {
-                        ModelName.append(num_now)
-                    }
                 }
-                let testVect4:SIMD3=SIMD3(data_now)
-                modelPos.append(testVect4)
-            }
-            length = num-2
-            
-//MARK: -// 启动计时器判断是否开始
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                currentHeading = manager.heading?.trueHeading ?? 0.0
-                //目前的磁力计角度与第一个点的角度之差
-                let delta = (currentHeading - savedHeading + 180).truncatingRemainder(dividingBy: 360) - 180
-                diff = delta < -180 ? delta + 360 : delta
-                //判断开始依据
-                if abs(diff)<0.5 {
-                    shouldStart = true
-                    timer?.invalidate()
-                    timer = nil
+                var temp=1
+                for line in myline
+                {
+                    temp+=1
+                    if temp>num-1{
+                        break
+                    }
+                    let myword:[String]=line.components(separatedBy: " ")
+                    var num=0
+                    var data_now:[Float]=[]
+                    for num_now in myword
+                    {
+                        num+=1
+                        //1，2，3为坐标
+                        if num<4{
+                            let now:Float
+                            now=Float(num_now) ?? 1.0
+                            data_now.append(now)
+                        }
+                        //4为磁力计方向
+                        if(num==4)
+                        {
+                            let now:Float
+                            now=Float(num_now) ?? 1.0
+                            deltaNorth.append(now)
+                        }
+                        //5为导航方向
+                        if num>4
+                        {
+                            ModelName.append(num_now)
+                        }
+                    }
+                    let testVect4:SIMD3=SIMD3(data_now)
+                    modelPos.append(testVect4)
+                }
+                length = num-2
+                
+                //MARK: -// 启动计时器判断是否开始
+                timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                    currentHeading = manager.heading?.trueHeading ?? 0.0
+                    //目前的磁力计角度与第一个点的角度之差
+                    let delta = (currentHeading - savedHeading + 180).truncatingRemainder(dividingBy: 360) - 180
+                    diff = delta < -180 ? delta + 360 : delta
+                    //判断开始依据
+                    if abs(diff)<0.5 {
+                        shouldStart = true
+                        timer?.invalidate()
+                        timer = nil
+                    }
                 }
             }
         }

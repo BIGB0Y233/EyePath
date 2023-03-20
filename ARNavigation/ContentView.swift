@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import AVFoundation
 
 struct ContentView: View,TableViewDelegate {
     
@@ -24,8 +25,6 @@ struct ContentView: View,TableViewDelegate {
     @State var shown = false
     @State var text = "untitled"
     @State var isDone = false
-   // var total = 2
- 
         
     var body: some View {
         ZStack{
@@ -75,8 +74,6 @@ struct ContentView: View,TableViewDelegate {
     }
     
     private func deletePath() {
-        //supplyData()
-        print(mutableData.mutableData)
     }
     
     func supplyData() {

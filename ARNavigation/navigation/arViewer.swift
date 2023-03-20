@@ -36,7 +36,6 @@ struct arViewer: View{
                 Text("相差距离:" + String(describing: distance)).frame(width: 250, height: 100, alignment: .center)
                 Text("index:" + String(describing: index)).frame(width: 250, height: 100, alignment: .center)
                 Button("结束") {
-                    //self.presentationMode.wrappedValue.dismiss()
                     stopFlag = true
                     timer?.invalidate()
                     timer = nil

@@ -9,6 +9,7 @@ import SwiftUI
 import ARKit
 import RealityKit
 import Combine
+import AVKit
 
 
 struct ARViewContainer: UIViewRepresentable{
@@ -28,6 +29,8 @@ struct ARViewContainer: UIViewRepresentable{
     @Binding var nextCoordinate: SIMD3<Float>
     @Binding var distance: Float
     @Binding var index: Int
+    
+    @State var audioplayer = AVPlayer(url: Bundle.main.url(forResource: "左转", withExtension: "wav")!)
 
 //MARK: - AR启动项
     func makeUIView(context: Context) -> ARView {
@@ -35,34 +38,37 @@ struct ARViewContainer: UIViewRepresentable{
         let config = ARWorldTrackingConfiguration()
         config.planeDetection=[.horizontal,.vertical]
         arView.session.run(config)
-        //let parentEntity = ModelEntity()
+        let parentEntity = AnchorEntity()
+        var counter = 0
         
 //MARK: - 加载模型
         for i in 0..<length
         {
-//            let cubee = try! ModelEntity.load(named: word[i])
-//            cubee.position = modelPos[i]
-//            parentEntity.addChild(cubee)
-            let box = customEntity(color: .green, position: modelPos[i])
+
+            let box = try! ModelEntity.load(named: modelName[i])
+            box.position = modelPos[i]
+
             
             //旋转模型
-            let radians = deltaNorth[i] * Float.pi / 180.0
+            let radians = -deltaNorth[i] * Float.pi / 180.0
             box.orientation = simd_quatf(angle: radians, axis: SIMD3(x: 0, y: 1, z: 0))
             box.transform.scale *= 0.5
+            parentEntity.addChild(box)
 
-            arView.scene.addAnchor(box)
+            arView.scene.addAnchor(parentEntity)
         }
         
 //MARK: -   启动计时器判断当前位置
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            counter+=1
             if index < length{
-            //语音
-//                        if counter % 5 == 0 {
-//                            let sound = Bundle.main.path(forResource: getSound(name: word[index]), ofType: "wav")
-//                            self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
-//                            self.audioPlayer.play()
-//                        }
-        
+           // 语音
+            if counter % 50 == 0 {
+                //let sound = Bundle.main.path(forResource: getSound(name: modelName[index]), ofType: "wav")
+                audioplayer = AVPlayer(url: Bundle.main.url(forResource: getSound(name: modelName[index]), withExtension: "wav")!)
+                audioplayer.play()
+            }
+                
         currentCoordinate = arView.cameraTransform.translation
         nextCoordinate = modelPos[index]
         distance = (pow(nextCoordinate.x - currentCoordinate.x,2)+pow(nextCoordinate.z - currentCoordinate.z,2)).squareRoot()
@@ -78,10 +84,6 @@ struct ARViewContainer: UIViewRepresentable{
             }
         }
 
-//            let anchor = AnchorEntity(plane: .horizontal)
-//            anchor.addChild(parentEntity)
-//            arView.scene.addAnchor(anchor)
-
         return arView
     }
 
@@ -93,18 +95,3 @@ struct ARViewContainer: UIViewRepresentable{
     }
 }
 
-class customEntity:Entity,HasModel,HasAnchoring{
-    var subs:[Cancellable]=[]
-    required init(color:UIColor) {
-        super.init()
-        self.components[ModelComponent]=ModelComponent(mesh: .generateBox(width: 0.1, height: 0.1, depth: 0.1), materials: [SimpleMaterial(color: color, isMetallic: false)])
-        }
-    convenience init(color:UIColor,position:SIMD3<Float>)
-    {
-        self.init(color: color)
-        self.position = position
-    }
-    required init() {
-        fatalError("initialize failed!")
-    }
-}

@@ -17,7 +17,6 @@ struct AddPathContainer: UIViewRepresentable
     @Binding var stopFlag: Bool
     
     //MARK: - create Node paramiters
-    @State var number: Int = 0
     @Binding var returndata: String
     @Binding var pathName: String
     @Binding var createNode: Bool
@@ -42,7 +41,7 @@ struct AddPathContainer: UIViewRepresentable
         createTxt(name:"direction.txt", fileBaseUrl: fileUrl)
 
         var originalNorth = 0.0 //初始方向
-
+        var number: Int = 0
         //MARK: -// 启动计时器记录位置
         DispatchQueue.main.async {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
@@ -54,14 +53,14 @@ struct AddPathContainer: UIViewRepresentable
                     write(string: String(format: "%f",originalNorth), name: "direction.txt",docPath: fileUrl)
                 }
                 let Xcoord = arView.cameraTransform.translation.x
-                let Ycoord = arView.cameraTransform.translation.y
+               // let Ycoord = arView.cameraTransform.translation.y     //高度记录
                 let Zcoord = arView.cameraTransform.translation.z
                 
                 //方向角度差
                 let delta = (trueNorth - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
                 let deltaNorth = delta < -180 ? delta + 360 : delta
 
-                returndata = String(Xcoord)+" "+String(Ycoord)+" "+String(Zcoord)+" "+String(format: "%f",deltaNorth)+" "+modelName+"\n"
+                returndata = String(Xcoord)+" "+String(-0.5)+" "+String(Zcoord)+" "+String(format: "%f",deltaNorth)+" "+modelName+"\n"
                 write(string: returndata, name: "Nodes.txt",docPath: fileUrl)
                 createNode = false
             }
