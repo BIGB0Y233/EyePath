@@ -28,49 +28,55 @@ struct AddPathView: View {
     @Binding var pathName: String
     
     var body: some View {
-        ZStack{
-            AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: $pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength).edgesIgnoringSafeArea(.all)
-            
+        NavigationStack {
             ZStack{
-                blurView(style: .light).frame(width: 400, height: 300, alignment: .center)
-                VStack{
-                    HStack{
-                        Button(action: {createNode=true
-                            modelName = "left"
-                        }
-                        ){Image(systemName: "arrow.left")}.frame(width: 50, height: 50).background(Color.gray)
-                        Button(action: {createNode=true
-                            modelName = "straight"
-                        }
-                        ){Image(systemName: "arrow.up")}.frame(width: 50, height: 50).background(Color.gray)
-                        
-                        Button(action: {createNode=true
-                            modelName = "right"
-                        }
-                        ){Image(systemName: "arrow.right")}.frame(width: 50, height: 50).background(Color.gray)
-                    }
-                    Text(displayData).frame(width: 400, height: 200, alignment: .center)
-                    Button("结束") {
-                        stopFlag = true
-                        timer?.invalidate()
-                        timer = nil
-                        if pathLength<1{
-                            //删除文件
-                            do{
-                                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
-                                fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
-                                let deletePath = try viewContext.fetch(fetchRequest).first!
-                                viewContext.delete(deletePath)
-                                try viewContext.save()
-                                result = "路径点小于1,路径无效，已删除❌！"
+                ZStack{
+                    AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: $pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength).edgesIgnoringSafeArea(.all)
+                    ZStack{
+                        blurView(style: .light).frame(width: 400, height: 300, alignment: .center)
+                        VStack{
+                            HStack{
+                                Button(action: {createNode=true
+                                    modelName = "left"
+                                }
+                                ){Image(systemName: "arrow.left")}.frame(width: 50, height: 50).background(Color.gray)
+                                Button(action: {createNode=true
+                                    modelName = "straight"
+                                }
+                                ){Image(systemName: "arrow.up")}.frame(width: 50, height: 50).background(Color.gray)
+                                
+                                Button(action: {createNode=true
+                                    modelName = "right"
+                                }
+                                ){Image(systemName: "arrow.right")}.frame(width: 50, height: 50).background(Color.gray)
                             }
-                            catch let error as NSError {
-                                print("path delete failed!")
-                                fatalError("Unresolved error \(error), \(error.userInfo)")
+                            Text(displayData).frame(width: 400, height: 200, alignment: .center)
+                            
+                            Button(action: {
+                                stopFlag = true
+                                timer?.invalidate()
+                                timer = nil
+                                if pathLength<1{
+                                    //删除文件
+                                    do{
+                                        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
+                                        fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
+                                        let deletePath = try viewContext.fetch(fetchRequest).first!
+                                        viewContext.delete(deletePath)
+                                        try viewContext.save()
+                                        result = "路径点小于1,路径无效，已删除❌！"
+                                    }
+                                    catch let error as NSError {
+                                        print("path delete failed!")
+                                        fatalError("Unresolved error \(error), \(error.userInfo)")
+                                    }
+                                }
+                                else{
+                                    result = "保存成功✅!"
+                                }
+                            }) {
+                                Text("结束")
                             }
-                        }
-                        else{
-                            result = "保存成功✅!"
                         }
                     }
                 }.alert(isPresented: $stopFlag) {
@@ -79,8 +85,8 @@ struct AddPathView: View {
                     })
                 }
                 NavigationLink(destination: ContentView(), isActive: $navigateToNextView) { EmptyView() }
-            }
-        }.navigationBarBackButtonHidden(true)
+            }.navigationBarBackButtonHidden(true)
+        }
     }
 }
 
@@ -90,5 +96,3 @@ struct AddPathView_Previews: PreviewProvider {
         AddPathView(pathName: .constant("default"))
     }
 }
-
-

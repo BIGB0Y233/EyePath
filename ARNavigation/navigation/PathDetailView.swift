@@ -20,6 +20,9 @@ struct PathDetailView: View {
                 .bold()
 //            Text(price)
 //                .font(.title2)
+            //                        NavigationLink(destination: compassView(pathName: $detailViewName), isActive: $detailViewActive) {
+            //                            EmptyView()
+            //                        }
         }
         .padding()
     }

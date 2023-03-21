@@ -23,45 +23,34 @@ struct ContentView: View {
     @State var isDone = false
         
     var body: some View {
-        ZStack{
-            ZStack{
-                NavigationLink(destination: AddPathNameView(), isActive: $gotoAdd) {
-                    EmptyView()
-                }
-                //                        NavigationLink(destination: compassView(pathName: $detailViewName), isActive: $detailViewActive) {
-                //                            EmptyView()
-                //                        }
-                NavigationView
-                {
-                    List {
-                        ForEach(myPath) { path in
-                            NavigationLink {
-                                PathDetailView(name: path.pathname ?? "default")
-//                                Text(String(path.initdirection))
-//                                Text(String(path.pathlength))
-//                                Text(path.anglediff?.last?.stringValue ?? "114514")
-//                                Text(path.position?.last?.last?.stringValue ?? "114524")
-//                                Text(path.direction?.last ?? "114534")
-                            } label: {
-                                Text(path.pathname ?? "114")
-                            }
-                        }
-                        .onDelete(perform: deletePath)
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            EditButton()
-                        }
-                        ToolbarItem {
-                            Button(action: {gotoAdd = true}) {
-                                Label("Add Item", systemImage: "plus")
-                            }
+            NavigationStack
+            {
+                List {
+                    ForEach(myPath) { path in
+                        NavigationLink {
+                            PathDetailView(name: path.pathname ?? "default")
+                            //                                Text(String(path.initdirection))
+                            //                                Text(String(path.pathlength))
+                            //                                Text(path.anglediff?.last?.stringValue ?? "114514")
+                            //                                Text(path.position?.last?.last?.stringValue ?? "114524")
+                            //                                Text(path.direction?.last ?? "114534")
+                        } label: {
+                            Text(path.pathname ?? "114")
                         }
                     }
-                    .navigationTitle("已保存路径")
+                    .onDelete(perform: deletePath)
                 }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        EditButton()
+                    }
+                    ToolbarItem {
+                        NavigationLink(destination: AddPathNameView()) { Label("Add Item", systemImage: "plus") }
+                    }
+                } .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("已保存路径")
+                .navigationBarBackButtonHidden(true)
             }
-        }.navigationBarBackButtonHidden(true)
     }
     //MARK: - TableViewDelegate Functions
     
