@@ -39,20 +39,20 @@ struct AddPathContainer: UIViewRepresentable
         //MARK: - 读取路径文件，启动计时器写入记录位置
         DispatchQueue.main.async {
             var originalNorth = 0.0 //初始方向
-            //创建文件
+            //写入数据
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
             fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
             do {
                 let writingPath = try viewContext.fetch(fetchRequest).first!
                 timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
                     let trueNorth = manager.heading!.trueHeading
+                    //print(trueNorth)
                     if createNode{
                         pathLength += 1
                         if pathLength == 1 {
                             //保存初始方向
                             originalNorth = trueNorth
-                            writingPath.setValue(originalNorth, forKey: "initdirection")
-                            if writingPath.value(forKey: "initdirection") is Float {
+                            if writingPath.value(forKey: "initdirection") is Double {
                                 writingPath.setValue(originalNorth, forKey: "initdirection")
                             }
                             // 保存图像
@@ -68,22 +68,27 @@ struct AddPathContainer: UIViewRepresentable
                             }
                         }
                         
-                        let Xcoord = NSNumber(value:arView.cameraTransform.translation.x)
-                        let Zcoord = NSNumber(value:arView.cameraTransform.translation.z)
-                        // let Ycoord = NSNumber(value:arView.cameraTransform.translation.y)     //高度记录
+//                        let Xcoord = NSNumber(value:arView.cameraTransform.translation.x)
+//                        let Zcoord = NSNumber(value:arView.cameraTransform.translation.z)
+//                        // let Ycoord = NSNumber(value:arView.cameraTransform.translation.y)     //高度记录
+                        
+                        let Xcoord = arView.cameraTransform.translation.x
+                        let Zcoord = arView.cameraTransform.translation.z
+                        // let Ycoord = arView.cameraTransform.translation.y     //高度记录
                         
                         //方向角度差
                         let delta = (trueNorth - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
                         let deltaNorth = delta < -180 ? delta + 360 : delta
-                        let nsNorth = NSNumber(value: deltaNorth)
+                       // let nsNorth = NSNumber(value: deltaNorth)
+                        let nsNorth = Float(deltaNorth)
                         
                         //坐标
-                        if var coordStack = writingPath.value(forKey: "position") as? [[NSNumber]] {
+                        if var coordStack = writingPath.value(forKey: "position") as? [[Float]] {
                             coordStack.append([Xcoord,-0.5,Zcoord])
                             writingPath.setValue(coordStack, forKey: "position")
                         }
                         //角度偏差
-                        if var angleStack = writingPath.value(forKey: "anglediff") as? [NSNumber] {
+                        if var angleStack = writingPath.value(forKey: "anglediff") as? [Float] {
                             angleStack.append(nsNorth)
                             writingPath.setValue(angleStack, forKey: "anglediff")
                         }
@@ -97,7 +102,8 @@ struct AddPathContainer: UIViewRepresentable
                             writingPath.setValue(pathLength, forKey: "pathlength")
                         }
                         
-                        returndata = String(Xcoord.floatValue)+" "+String(Zcoord.floatValue)
+//                        returndata = String(Xcoord.floatValue)+" "+String(Zcoord.floatValue)
+                        returndata = String(Xcoord)+" "+String(Zcoord)
                         createNode = false
                     }
                 }
@@ -114,7 +120,6 @@ struct AddPathContainer: UIViewRepresentable
             uiView.session.pause()
             do {
                 try viewContext.save()
-                //print("保存成功")
             } catch let error as NSError {
                 print("writing failed!")
                 fatalError("Unresolved error \(error), \(error.userInfo)")

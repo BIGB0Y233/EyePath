@@ -84,7 +84,12 @@ struct AddPathView: View {
                         navigateToNextView = true
                     })
                 }
-                NavigationLink(destination: ContentView(), isActive: $navigateToNextView) { EmptyView() }
+//                NavigationLink(destination: ContentView(), isActive: $navigateToNextView) { EmptyView() }
+                .navigationDestination(isPresented: $navigateToNextView)
+                        {
+                             ContentView()
+                             EmptyView()
+                         }
             }.navigationBarBackButtonHidden(true)
         }
     }

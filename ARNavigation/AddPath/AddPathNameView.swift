@@ -56,7 +56,12 @@ struct AddPathNameView: View {
                     }
                     Spacer()
                 }
-                NavigationLink(destination: AddPathView(pathName: $pathName), isActive: $readytoAdd) { EmptyView() }
+               // NavigationLink(destination: AddPathView(pathName: $pathName), isActive: $readytoAdd) { EmptyView() }
+                .navigationDestination(isPresented: $readytoAdd)
+                {
+                    AddPathView(pathName: $pathName)
+                    EmptyView()
+                }
         }
     }
     
@@ -94,7 +99,6 @@ struct AddPathNameView: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        print(readytoAdd)
     }
 }
 

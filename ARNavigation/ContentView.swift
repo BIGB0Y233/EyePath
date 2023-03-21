@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CoreData
-import AVFoundation
 
 struct ContentView: View {
     
@@ -19,8 +18,6 @@ struct ContentView: View {
     
     //MARK: - 添加路径参数
     @State private var gotoAdd = false
-    @State var text = "untitled"
-    @State var isDone = false
         
     var body: some View {
             NavigationStack
@@ -53,10 +50,14 @@ struct ContentView: View {
             }
     }
     //MARK: - TableViewDelegate Functions
-    
     private func deletePath(offsets: IndexSet) {
         withAnimation {
-            offsets.map { myPath[$0] }.forEach(viewContext.delete)
+//            offsets.map { myPath[$0] }.forEach(viewContext.delete)
+            offsets.map { myPath[$0] }.forEach{
+                selectedPath in
+                deleteImage(imageName: selectedPath.pathname!)
+                viewContext.delete(selectedPath)
+            }
             do {
                 try viewContext.save()
             } catch {
@@ -68,6 +69,15 @@ struct ContentView: View {
         }
     }
     
+    private func deleteImage(imageName:String){
+        let fileManager = FileManager.default
+        do {
+            let imagePath = URL(fileURLWithPath: NSHomeDirectory()+"/Documents/\(imageName)")
+            try fileManager.removeItem(at: imagePath)
+        } catch {
+            print("Error while deleting file: \(error.localizedDescription)")
+        }
+    }
 }
 
 private let itemFormatter: DateFormatter = {
@@ -82,4 +92,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+
 

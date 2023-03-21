@@ -16,12 +16,12 @@ extension Path {
         return NSFetchRequest<Path>(entityName: "Path")
     }
 
-    @NSManaged public var anglediff: [NSNumber]?
+    @NSManaged public var anglediff: [Float]?
     @NSManaged public var direction: [String]?
-    @NSManaged public var initdirection: Float
+    @NSManaged public var initdirection: Double
     @NSManaged public var pathdescription: String?
     @NSManaged public var pathname: String?
-    @NSManaged public var position: [[NSNumber]]?
+    @NSManaged public var position: [[Float]]?
     @NSManaged public var timestamp: Date?
     @NSManaged public var pathlength: Int16
     
