@@ -55,6 +55,17 @@ struct AddPathContainer: UIViewRepresentable
                             if writingPath.value(forKey: "initdirection") is Float {
                                 writingPath.setValue(originalNorth, forKey: "initdirection")
                             }
+                            // 保存图像
+                            guard let currentFrame = arView.session.currentFrame else{ return}
+                            let image = CIImage(cvPixelBuffer: currentFrame.capturedImage)
+                            let context = CIContext(options: nil)
+                            if let cgImage = context.createCGImage(image, from: image.extent) {
+                                let uiImage = UIImage(cgImage: cgImage)
+                                saveImageLocally(image: uiImage, fileName: pathName)
+                            }
+                            else{
+                                print("picture not saved!")
+                            }
                         }
                         
                         let Xcoord = NSNumber(value:arView.cameraTransform.translation.x)
@@ -109,7 +120,21 @@ struct AddPathContainer: UIViewRepresentable
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
-}
+    }
 
+    func saveImageLocally(image: UIImage, fileName: String) {
+        // 获取文档目录的位置
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        // 创建一个指向文件名的URL
+        let url = documentsDirectory.appendingPathComponent(fileName)
+        if let data = image.pngData() {
+            do {
+                try data.write(to: url)
+            } catch {
+                print("Error saving image locally")
+            }
+        }
+    }
+    
 }
 

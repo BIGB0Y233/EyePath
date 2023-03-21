@@ -29,6 +29,7 @@
 		430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441029C84F3700652B12 /* AddPathNameView.swift */; };
 		430A441829C9514200652B12 /* Path+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441629C9514200652B12 /* Path+CoreDataClass.swift */; };
 		430A441929C9514200652B12 /* Path+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441729C9514200652B12 /* Path+CoreDataProperties.swift */; };
+		430A441B29C966EB00652B12 /* PathDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441A29C966EB00652B12 /* PathDetailView.swift */; };
 		4363453929B892DD00ACFA23 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4363453829B892DD00ACFA23 /* TableViewCell.xib */; };
 		438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A329B87B5600A4E59C /* ARNavigationApp.swift */; };
 		438695A629B87B5600A4E59C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A529B87B5600A4E59C /* Persistence.swift */; };
@@ -91,6 +92,7 @@
 		430A441029C84F3700652B12 /* AddPathNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPathNameView.swift; sourceTree = "<group>"; };
 		430A441629C9514200652B12 /* Path+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataClass.swift"; sourceTree = "<group>"; };
 		430A441729C9514200652B12 /* Path+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		430A441A29C966EB00652B12 /* PathDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDetailView.swift; sourceTree = "<group>"; };
 		4363453829B892DD00ACFA23 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		4363453A29C1800A00ACFA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		438695A029B87B5600A4E59C /* ARNavigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARNavigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,6 +260,7 @@
 				438695D629B885B400A4E59C /* compassView.swift */,
 				438695D729B885B400A4E59C /* arViewer.swift */,
 				438695D929B885B400A4E59C /* ARViewContainer.swift */,
+				430A441A29C966EB00652B12 /* PathDetailView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				430A441829C9514200652B12 /* Path+CoreDataClass.swift in Sources */,
 				438695AB29B87B5600A4E59C /* ContentView.swift in Sources */,
 				438695EB29B885B400A4E59C /* ARViewContainer.swift in Sources */,
+				430A441B29C966EB00652B12 /* PathDetailView.swift in Sources */,
 				438695ED29B885B400A4E59C /* BlurView.swift in Sources */,
 				438695F029B885B400A4E59C /* TableView.swift in Sources */,
 				438695F129B885B400A4E59C /* AlertView.swift in Sources */,

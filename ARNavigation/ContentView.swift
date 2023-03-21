@@ -36,8 +36,9 @@ struct ContentView: View {
                     List {
                         ForEach(myPath) { path in
                             NavigationLink {
-                                Text(String(path.initdirection))
-                                Text(String(path.pathlength))
+                                PathDetailView(name: path.pathname ?? "default")
+//                                Text(String(path.initdirection))
+//                                Text(String(path.pathlength))
 //                                Text(path.anglediff?.last?.stringValue ?? "114514")
 //                                Text(path.position?.last?.last?.stringValue ?? "114524")
 //                                Text(path.direction?.last ?? "114534")
@@ -59,7 +60,7 @@ struct ContentView: View {
                     }
                     .navigationTitle("已保存路径")
                 }
-            }.navigate(to: AddPathView(pathName: $text), when: $isDone)
+            }
         }.navigationBarBackButtonHidden(true)
     }
     //MARK: - TableViewDelegate Functions
