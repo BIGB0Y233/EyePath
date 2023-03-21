@@ -39,7 +39,6 @@ struct AddPathContainer: UIViewRepresentable
         //MARK: - 读取路径文件，启动计时器写入记录位置
         DispatchQueue.main.async {
             var originalNorth = 0.0 //初始方向
-            var number: Int = 0 //计数
             //创建文件
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
             fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
@@ -48,12 +47,12 @@ struct AddPathContainer: UIViewRepresentable
                 timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
                     let trueNorth = manager.heading!.trueHeading
                     if createNode{
-                        number += 1
-                        if number == 1 {
+                        pathLength += 1
+                        if pathLength == 1 {
                             //保存初始方向
                             originalNorth = trueNorth
                             writingPath.setValue(originalNorth, forKey: "initdirection")
-                            if writingPath.value(forKey: "initdirection") is NSNumber {
+                            if writingPath.value(forKey: "initdirection") is Float {
                                 writingPath.setValue(originalNorth, forKey: "initdirection")
                             }
                         }
@@ -66,6 +65,7 @@ struct AddPathContainer: UIViewRepresentable
                         let delta = (trueNorth - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
                         let deltaNorth = delta < -180 ? delta + 360 : delta
                         let nsNorth = NSNumber(value: deltaNorth)
+                        
                         //坐标
                         if var coordStack = writingPath.value(forKey: "position") as? [[NSNumber]] {
                             coordStack.append([Xcoord,-0.5,Zcoord])
@@ -81,7 +81,12 @@ struct AddPathContainer: UIViewRepresentable
                             directionStack.append(modelName)
                             writingPath.setValue(directionStack, forKey: "direction")
                         }
-
+                        //路径长度
+                        if writingPath.value(forKey: "pathlength") is Int {
+                            writingPath.setValue(pathLength, forKey: "pathlength")
+                        }
+                        
+                        returndata = String(Xcoord.floatValue)+" "+String(Zcoord.floatValue)
                         createNode = false
                     }
                 }
@@ -98,7 +103,7 @@ struct AddPathContainer: UIViewRepresentable
             uiView.session.pause()
             do {
                 try viewContext.save()
-                print("保存成功")
+                //print("保存成功")
             } catch let error as NSError {
                 print("writing failed!")
                 fatalError("Unresolved error \(error), \(error.userInfo)")

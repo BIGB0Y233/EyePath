@@ -36,10 +36,11 @@ struct ContentView: View {
                     List {
                         ForEach(myPath) { path in
                             NavigationLink {
-                                Text(String(path.initdirection?.floatValue ?? 114.14))
-                                Text(path.anglediff?.last?.stringValue ?? "114514")
-                                Text(path.position?.last?.last?.stringValue ?? "114524")
-                                Text(path.direction?.last ?? "114534")
+                                Text(String(path.initdirection))
+                                Text(String(path.pathlength))
+//                                Text(path.anglediff?.last?.stringValue ?? "114514")
+//                                Text(path.position?.last?.last?.stringValue ?? "114524")
+//                                Text(path.direction?.last ?? "114534")
                             } label: {
                                 Text(path.pathname ?? "114")
                             }
@@ -66,7 +67,6 @@ struct ContentView: View {
     private func deletePath(offsets: IndexSet) {
         withAnimation {
             offsets.map { myPath[$0] }.forEach(viewContext.delete)
-
             do {
                 try viewContext.save()
             } catch {

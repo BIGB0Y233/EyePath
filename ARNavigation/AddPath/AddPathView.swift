@@ -7,9 +7,11 @@
 import Foundation
 import SwiftUI
 import RealityKit
-import CoreLocation
+import CoreData
 
 struct AddPathView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
     
     //MARK: - create Node paramiters
     @State var displayData = "tap on direction buttons to start"
@@ -35,18 +37,15 @@ struct AddPathView: View {
                     HStack{
                         Button(action: {createNode=true
                             modelName = "left"
-                            pathLength+=1
                         }
                         ){Image(systemName: "arrow.left")}.frame(width: 50, height: 50).background(Color.gray)
                         Button(action: {createNode=true
                             modelName = "straight"
-                            pathLength+=1
                         }
                         ){Image(systemName: "arrow.up")}.frame(width: 50, height: 50).background(Color.gray)
                         
                         Button(action: {createNode=true
                             modelName = "right"
-                            pathLength+=1
                         }
                         ){Image(systemName: "arrow.right")}.frame(width: 50, height: 50).background(Color.gray)
                     }
@@ -56,8 +55,19 @@ struct AddPathView: View {
                         timer?.invalidate()
                         timer = nil
                         if pathLength<1{
-                            result = "路径点小于1,路径无效，已删除❌！"
                             //删除文件
+                            do{
+                                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
+                                fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
+                                let deletePath = try viewContext.fetch(fetchRequest).first!
+                                viewContext.delete(deletePath)
+                                try viewContext.save()
+                                result = "路径点小于1,路径无效，已删除❌！"
+                            }
+                            catch let error as NSError {
+                                print("path delete failed!")
+                                fatalError("Unresolved error \(error), \(error.userInfo)")
+                            }
                         }
                         else{
                             result = "保存成功✅!"

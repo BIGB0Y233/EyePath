@@ -84,6 +84,7 @@ struct AddPathNameView: View {
         let newPath = Path(context: viewContext)
         newPath.pathname = pathName
         newPath.pathdescription = pathDescription
+        //Transformable数据需要赋初值
         newPath.position = [[0.0,0.0,0.0]]
         newPath.anglediff = [0.0]
         newPath.direction = ["straight"]

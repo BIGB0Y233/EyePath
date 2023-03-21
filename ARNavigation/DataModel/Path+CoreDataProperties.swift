@@ -2,7 +2,7 @@
 //  Path+CoreDataProperties.swift
 //  ARNavigation
 //
-//  Created by ck on 2023/3/20.
+//  Created by ck on 2023/3/21.
 //
 //
 
@@ -16,13 +16,16 @@ extension Path {
         return NSFetchRequest<Path>(entityName: "Path")
     }
 
-    @NSManaged public var timestamp: Date?
-    @NSManaged public var position: [[NSNumber]]?
-    @NSManaged public var pathname: String?
-    @NSManaged public var pathdescription: String?
-    @NSManaged public var initdirection: NSNumber?
     @NSManaged public var anglediff: [NSNumber]?
     @NSManaged public var direction: [String]?
+    @NSManaged public var initdirection: Float
+    @NSManaged public var pathdescription: String?
+    @NSManaged public var pathname: String?
+    @NSManaged public var position: [[NSNumber]]?
+    @NSManaged public var timestamp: Date?
+    @NSManaged public var pathlength: Int16
+    
+    
 
 }
 
