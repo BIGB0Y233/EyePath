@@ -34,16 +34,16 @@ struct arViewer: View{
                 ZStack{
                     ARViewContainer(timer: $timer, stopFlag: $stopFlag, arrived: $result, pathLength: pathLength, modelPos: modelPos, modelName: modelName, deltaNorth: deltaNorth,currentCoordinate: $currentCoordinate, nextCoordinate: $nextCoordinate, distance: $distance, index: $index).edgesIgnoringSafeArea(.all)
                     VStack{
-                        Text("目前坐标:" + String(describing: currentCoordinate)).frame(width: 250, height: 100, alignment: .center)
-                        Text("下个点坐标:" + String(describing: nextCoordinate)).frame(width: 250, height: 100, alignment: .center)
-                        Text("相差距离:" + String(describing: distance)).frame(width: 250, height: 100, alignment: .center)
-                        Text("index:" + String(describing: index)).frame(width: 250, height: 100, alignment: .center)
+                        Text("目前坐标:" + String(describing: currentCoordinate)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
+                        Text("下个点坐标:" + String(describing: nextCoordinate)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
+                        Text("相差距离:" + String(describing: distance)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
+                        Text("index:" + String(describing: index)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
                         Button("结束") {
                             stopFlag = true
                             result = "已结束导航"
                             timer?.invalidate()
                             timer = nil
-                        }
+                        }.foregroundColor(.cyan)
                     }.alert(isPresented: $stopFlag) {
                         Alert(title: Text("⚠️"), message: Text(result), dismissButton: .default(Text("Ok")) {
                             navigateToNextView = true

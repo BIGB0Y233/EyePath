@@ -10,7 +10,7 @@ import Foundation
 func getSound(name:String) -> String {
     switch name {
     case "straight":
-        return "继续直行"
+        return "直行"
     case "left":
         return "左转"
     case "right":

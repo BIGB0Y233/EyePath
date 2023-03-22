@@ -33,24 +33,29 @@ struct AddPathView: View {
                 ZStack{
                     AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: $pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength).edgesIgnoringSafeArea(.all)
                     ZStack{
-                        blurView(style: .light).frame(width: 400, height: 300, alignment: .center)
+                        blurView(style: .light).frame(width: 300, height: 300, alignment: .center).clipShape(RoundedRectangle(cornerRadius: 8))
                         VStack{
                             HStack{
                                 Button(action: {createNode=true
                                     modelName = "left"
                                 }
-                                ){Image(systemName: "arrow.left")}.frame(width: 50, height: 50).background(Color.gray)
+                                ){Text("⬅️").padding(20)}//.frame(width: 50, height: 50).background(Color.white)
                                 Button(action: {createNode=true
                                     modelName = "straight"
                                 }
-                                ){Image(systemName: "arrow.up")}.frame(width: 50, height: 50).background(Color.gray)
+                                ){Text("⬆️").padding(20)}
                                 
                                 Button(action: {createNode=true
                                     modelName = "right"
                                 }
-                                ){Image(systemName: "arrow.right")}.frame(width: 50, height: 50).background(Color.gray)
+                                ){Text("➡️").padding(20)}
                             }
-                            Text(displayData).frame(width: 400, height: 200, alignment: .center)
+                            Button(action: {createNode=true
+                                modelName = "destination"
+                            }
+                            ){Text("🏁").padding(20)}
+                            Text(displayData).frame(width: 400, height: 50, alignment: .center)
+                            Text("已记录点数：\(pathLength)").frame(width: 400, height: 50, alignment: .center)
                             
                             Button(action: {
                                 stopFlag = true
@@ -75,7 +80,7 @@ struct AddPathView: View {
                                     result = "保存成功✅!"
                                 }
                             }) {
-                                Text("结束")
+                                Text("结束").frame(width: 100, height: 50, alignment: .center)
                             }
                         }
                     }

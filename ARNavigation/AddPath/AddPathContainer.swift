@@ -24,7 +24,7 @@ struct AddPathContainer: UIViewRepresentable
     @Binding var modelName: String
     @Binding var pathLength: Int
 
-    var manager : CLLocationManager = CLLocationManager()
+    let manager : CLLocationManager = CLLocationManager()
     @Environment(\.managedObjectContext) private var viewContext
 
     func makeUIView(context: Context) -> ARView {
@@ -44,7 +44,7 @@ struct AddPathContainer: UIViewRepresentable
             fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
             do {
                 let writingPath = try viewContext.fetch(fetchRequest).first!
-                timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
                     let trueNorth = manager.heading!.trueHeading
                     //print(trueNorth)
                     if createNode{
@@ -52,6 +52,7 @@ struct AddPathContainer: UIViewRepresentable
                         if pathLength == 1 {
                             //保存初始方向
                             originalNorth = trueNorth
+                            //print(originalNorth)
                             if writingPath.value(forKey: "initdirection") is Double {
                                 writingPath.setValue(originalNorth, forKey: "initdirection")
                             }
@@ -68,10 +69,6 @@ struct AddPathContainer: UIViewRepresentable
                             }
                         }
                         
-//                        let Xcoord = NSNumber(value:arView.cameraTransform.translation.x)
-//                        let Zcoord = NSNumber(value:arView.cameraTransform.translation.z)
-//                        // let Ycoord = NSNumber(value:arView.cameraTransform.translation.y)     //高度记录
-                        
                         let Xcoord = arView.cameraTransform.translation.x
                         let Zcoord = arView.cameraTransform.translation.z
                         // let Ycoord = arView.cameraTransform.translation.y     //高度记录
@@ -79,8 +76,7 @@ struct AddPathContainer: UIViewRepresentable
                         //方向角度差
                         let delta = (trueNorth - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
                         let deltaNorth = delta < -180 ? delta + 360 : delta
-                       // let nsNorth = NSNumber(value: deltaNorth)
-                        let nsNorth = Float(deltaNorth)
+                        let floatDeltaNorth = Float(deltaNorth)
                         
                         //坐标
                         if var coordStack = writingPath.value(forKey: "position") as? [[Float]] {
@@ -89,7 +85,7 @@ struct AddPathContainer: UIViewRepresentable
                         }
                         //角度偏差
                         if var angleStack = writingPath.value(forKey: "anglediff") as? [Float] {
-                            angleStack.append(nsNorth)
+                            angleStack.append(floatDeltaNorth)
                             writingPath.setValue(angleStack, forKey: "anglediff")
                         }
                         //路径点方向
@@ -120,6 +116,7 @@ struct AddPathContainer: UIViewRepresentable
             uiView.session.pause()
             do {
                 try viewContext.save()
+                manager.stopUpdatingHeading()
             } catch let error as NSError {
                 print("writing failed!")
                 fatalError("Unresolved error \(error), \(error.userInfo)")

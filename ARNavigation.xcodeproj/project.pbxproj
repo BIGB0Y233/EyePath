@@ -30,6 +30,8 @@
 		430A441829C9514200652B12 /* Path+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441629C9514200652B12 /* Path+CoreDataClass.swift */; };
 		430A441929C9514200652B12 /* Path+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441729C9514200652B12 /* Path+CoreDataProperties.swift */; };
 		430A441B29C966EB00652B12 /* PathDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441A29C966EB00652B12 /* PathDetailView.swift */; };
+		430A442629CAD9F200652B12 /* destination.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A442529CAD9F200652B12 /* destination.reality */; };
+		430A442929CAF98C00652B12 /* 直行.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A442729CAF98C00652B12 /* 直行.wav */; };
 		438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A329B87B5600A4E59C /* ARNavigationApp.swift */; };
 		438695A629B87B5600A4E59C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A529B87B5600A4E59C /* Persistence.swift */; };
 		438695A929B87B5600A4E59C /* ARNavigation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 438695A729B87B5600A4E59C /* ARNavigation.xcdatamodeld */; };
@@ -89,6 +91,8 @@
 		430A441629C9514200652B12 /* Path+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataClass.swift"; sourceTree = "<group>"; };
 		430A441729C9514200652B12 /* Path+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		430A441A29C966EB00652B12 /* PathDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDetailView.swift; sourceTree = "<group>"; };
+		430A442529CAD9F200652B12 /* destination.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = destination.reality; sourceTree = "<group>"; };
+		430A442729CAF98C00652B12 /* 直行.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "直行.wav"; sourceTree = "<group>"; };
 		4363453A29C1800A00ACFA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		438695A029B87B5600A4E59C /* ARNavigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARNavigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		438695A329B87B5600A4E59C /* ARNavigationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationApp.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 		430A436829C6DE5D00652B12 /* ARModel */ = {
 			isa = PBXGroup;
 			children = (
+				430A442529CAD9F200652B12 /* destination.reality */,
 				430A433D29C6D81B00652B12 /* left.reality */,
 				430A433E29C6D81B00652B12 /* right.reality */,
 				430A433F29C6D81B00652B12 /* straight.reality */,
@@ -150,6 +155,7 @@
 		430A436929C6DF6A00652B12 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				430A442729CAF98C00652B12 /* 直行.wav */,
 				430A436A29C6DF6A00652B12 /* 米.wav */,
 				430A436B29C6DF6A00652B12 /* 右转.wav */,
 				430A436C29C6DF6A00652B12 /* 一.wav */,
@@ -386,11 +392,13 @@
 				430A438829C6DF6A00652B12 /* 五.wav in Resources */,
 				430A438D29C6DF6A00652B12 /* 九.wav in Resources */,
 				430A438029C6DF6A00652B12 /* 六.wav in Resources */,
+				430A442629CAD9F200652B12 /* destination.reality in Resources */,
 				430A437D29C6DF6A00652B12 /* 右转.wav in Resources */,
 				438695B129B87B5800A4E59C /* Preview Assets.xcassets in Resources */,
 				430A437C29C6DF6A00652B12 /* 米.wav in Resources */,
 				430A434229C6D81B00652B12 /* straight.reality in Resources */,
 				438695AD29B87B5800A4E59C /* Assets.xcassets in Resources */,
+				430A442929CAF98C00652B12 /* 直行.wav in Resources */,
 				430A437E29C6DF6A00652B12 /* 一.wav in Resources */,
 				430A434029C6D81B00652B12 /* left.reality in Resources */,
 				430A437F29C6DF6A00652B12 /* 七.wav in Resources */,
