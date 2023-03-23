@@ -6,54 +6,75 @@
 //
 
 import SwiftUI
-import CoreLocation
 import CoreData
 
 struct compareView: View {
     
-    @State var timer: Timer?
     @Environment(\.managedObjectContext) private var viewContext
-    
     //MARK: -判断是否开始
-    @State var diff:Double = 0.0
     @State var shouldStart = false
-//    @State var saved:Double = 0.0
-//    @State var current:Double = 0.0
-    
     //MARK: - 路线数据
     let pathName : String  //路线名称
     @State var pathLength = 0   //路线长度
     @State var modelPos:[SIMD3<Float>]=[]   //模型坐标
-    @State var deltaNorth:[Float]=[]    //磁力计角度差
+    @State var trueNorth:[Double]=[]    //磁力计角度
     @State var ModelName:[String]=[]    //模型名称
     
+    @StateObject private var frameModel = FrameModel()
     
     var body: some View {
+        ZStack{
             VStack{
-                Text("调整你面向的方位使直到以下数值接近0\n（越接近越好）")
-                Text("👇").font(.largeTitle)
-//                Text(String(saved))
-//                Text(String(current))
-                Text(String(diff)).onAppear{
+                Text("调整你所站位置和面向的方位\n（两个画面越接近越好）")
+                Text("👇").font(.largeTitle).onAppear{
+                    DispatchQueue.main.async {
                         loadPathData()
+                    }}.padding(20)
+                HStack{
+                    Image(uiImage: loadImageFromPath(path: pathName))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(
+                            width: 150,
+                            height: 200,
+                            alignment: .center)
+                    if let image = frameModel.frame {
+                        Image(image, scale: 1.0, orientation: .up, label: Text("Video Capture"))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(
+                                width: 150,
+                                height: 200,
+                                alignment: .center)
+                    } else {
+                        EmptyView()
                     }
-                .navigationDestination(isPresented: $shouldStart)
-                        {
-                            arViewer(modelPos: modelPos, modelName: ModelName, pathLength: pathLength, deltaNorth: deltaNorth)
-                             EmptyView()
-                         }
-                }.onDisappear{
-            timer?.invalidate()
-            timer = nil
+                }.padding(30)
+                Button("已对齐，开始导航"){
+                    frameModel.stopSubscriptions()
+                    shouldStart = true
+                }
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(width: 220, height: 60)
+                .background(Color.blue)
+            .cornerRadius(15.0)
+                Spacer()
+            }
+            ErrorView(error: frameModel.error)
+            .navigationDestination(isPresented: $shouldStart)
+            {
+                arViewer(modelPos: modelPos, modelName: ModelName, pathLength: pathLength, trueNorth: trueNorth)
+                EmptyView()
+            }
+        }.onDisappear{
+            frameModel.stopSubscriptions()
         }
     }
     
     //MARK: - 读取路线数据
     func loadPathData(){
-        var savedHeading:Double = 0.0   //初始方向
-        let manager : CLLocationManager = CLLocationManager()
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingHeading()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
         fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
         do {
@@ -67,10 +88,10 @@ struct compareView: View {
                 }
             }
             //路径点角度差
-            if let fetchingDiff = readingPath.value(forKey: "anglediff") as? [Float] {
-                for eachDiff in fetchingDiff
+            if let fetchingTrueNorth = readingPath.value(forKey: "truenorth") as? [Double] {
+                for eachTrueNorth in fetchingTrueNorth
                 {
-                    deltaNorth.append(eachDiff)
+                    trueNorth.append(eachTrueNorth)
                 }
             }
             //路径点箭头方向
@@ -80,30 +101,10 @@ struct compareView: View {
                     ModelName.append(eachDirection)
                 }
             }
-            //起点方向
-            if let fetchingInitDire = readingPath.value(forKey: "initdirection") as? Double {
-                savedHeading = fetchingInitDire
-               // saved = savedHeading
+            
+            if let fetchingPathLength = readingPath.value(forKey: "pathlength") as? Int {
+                    pathLength = fetchingPathLength
             }
-            //路线长度
-            if let fetchingLength = readingPath.value(forKey: "pathlength") as? Int {
-                pathLength = fetchingLength
-            }
-            //MARK: -// 启动计时器判断是否开始
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                    let currentHeading = manager.heading?.trueHeading ?? 0.0
-                   // print(currentHeading)
-                    //目前的磁力计角度与第一个点的角度之差
-                    let delta = (currentHeading - savedHeading + 180).truncatingRemainder(dividingBy: 360) - 180
-                    diff = delta < -180 ? delta + 360 : delta
-               //     current = currentHeading
-                    //判断开始依据
-                    if abs(diff)<0.5 {
-                        shouldStart = true
-                        timer?.invalidate()
-                        timer = nil
-                    }
-                }
         }
         catch let error as NSError {
             print("path fetching failed!")
@@ -115,6 +116,7 @@ struct compareView: View {
 
 struct compassView_Previews: PreviewProvider {
     static var previews: some View {
-        compareView(pathName: "default")
+        compareView(pathName: "1123")
     }
 }
+

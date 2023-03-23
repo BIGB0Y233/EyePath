@@ -15,8 +15,9 @@ struct AddPathView: View {
     
     //MARK: - create Node paramiters
     @State var displayData = "tap on direction buttons to start"
+    @State var timerCounter = 0
     @State var createNode = false
-    @State var modelName = "straight"
+    @State var modelName = "startingpoint"
     @State var pathLength = 0
     
     //MARK: - 进程控制
@@ -24,14 +25,14 @@ struct AddPathView: View {
     @State var stopFlag = false
     @State private var result = ""
     @State private var navigateToNextView = false
-    
-    @Binding var pathName: String
+
+    let pathName: String
     
     var body: some View {
         NavigationStack {
             ZStack{
                 ZStack{
-                    AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: $pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength).edgesIgnoringSafeArea(.all)
+                    AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength, timerCounter: $timerCounter).edgesIgnoringSafeArea(.all)
                     ZStack{
                         blurView(style: .light).frame(width: 300, height: 300, alignment: .center).clipShape(RoundedRectangle(cornerRadius: 8))
                         VStack{
@@ -54,8 +55,9 @@ struct AddPathView: View {
                                 modelName = "destination"
                             }
                             ){Text("🏁").padding(20)}
-                            Text(displayData).frame(width: 400, height: 50, alignment: .center)
-                            Text("已记录点数：\(pathLength)").frame(width: 400, height: 50, alignment: .center)
+                            Text(displayData).frame(width: 400, height: 20, alignment: .center)
+                            Text("已记录点数：\(pathLength)").frame(width: 400, height: 20, alignment: .center)
+                            Text("时间：\(String(timerCounter/2))s").frame(width: 400, height: 20, alignment: .center)
                             
                             Button(action: {
                                 stopFlag = true
@@ -103,6 +105,6 @@ struct AddPathView: View {
 
 struct AddPathView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPathView(pathName: .constant("default"))
+        AddPathView(pathName: "default")
     }
 }

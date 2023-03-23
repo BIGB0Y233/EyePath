@@ -22,22 +22,23 @@ struct ARViewContainer: UIViewRepresentable{
     let pathLength: Int
     let modelPos:[SIMD3<Float>]
     let modelName:[String]
-    let deltaNorth:[Float]
+    let trueNorth:[Double]
 
 //MARK: - 状态显示
     @Binding var currentCoordinate: SIMD3<Float>
     @Binding var nextCoordinate: SIMD3<Float>
     @Binding var distance: Float
     @Binding var index: Int
+    @Binding var displayTrueNorth: Double
 
 //MARK: - AR启动项
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection=[.horizontal,.vertical]
+        config.planeDetection=[.horizontal]
         arView.session.run(config)
         let parentEntity = AnchorEntity()
-        var counter = 0
+        let originalNorth = trueNorth[1] //初始方向
       //  var player: AVAudioPlayer?
         //MARK: - 加载模型
         for i in 0..<pathLength+1
@@ -45,11 +46,15 @@ struct ARViewContainer: UIViewRepresentable{
             let box = try! ModelEntity.load(named: modelName[i])
             box.position = modelPos[i]
             
-            //旋转模型
-                let radians = -deltaNorth[i] * Float.pi / 180.0
+            if i != 0{
+                //以方向角度差旋转模型
+                let delta = (trueNorth[i] - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
+                let deltaNorth = delta < -180 ? delta + 360 : delta
+                let radians = -Float(deltaNorth) * Float.pi / 180.0
                 box.orientation = simd_quatf(angle: radians, axis: SIMD3(x: 0, y: 1, z: 0))
                 box.transform.scale *= 0.5
-            
+            }
+
             parentEntity.addChild(box)
         }
         arView.scene.addAnchor(parentEntity)
@@ -58,13 +63,12 @@ struct ARViewContainer: UIViewRepresentable{
         DispatchQueue.main.async {
         //var distanceStack:[Float] = []
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            counter+=1
-            //print(counter)
             if index < pathLength{
                 //距下一个点距离判断
                 currentCoordinate = arView.cameraTransform.translation
                 nextCoordinate = modelPos[index+1]
                 distance = (pow(nextCoordinate.x - currentCoordinate.x,2)+pow(nextCoordinate.z - currentCoordinate.z,2)).squareRoot()
+                displayTrueNorth = trueNorth[index+1]
                 
                 // 语音
 //                distanceStack.append(distance)

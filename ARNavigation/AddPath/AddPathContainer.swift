@@ -19,10 +19,11 @@ struct AddPathContainer: UIViewRepresentable
     
     //MARK: - create Node paramiters
     @Binding var returndata: String
-    @Binding var pathName: String
+    let pathName: String
     @Binding var createNode: Bool
     @Binding var modelName: String
     @Binding var pathLength: Int
+    @Binding var timerCounter: Int
 
     let manager : CLLocationManager = CLLocationManager()
     @Environment(\.managedObjectContext) private var viewContext
@@ -31,62 +32,50 @@ struct AddPathContainer: UIViewRepresentable
 
         let arView = ARView(frame: .zero)
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection=[.horizontal,.vertical]
+        config.planeDetection=[.horizontal]
         arView.session.run(config)
+        
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingHeading()
-
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
+        fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
         //MARK: - 读取路径文件，启动计时器写入记录位置
         DispatchQueue.main.async {
-            var originalNorth = 0.0 //初始方向
-            //写入数据
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
-            fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
             do {
-                let writingPath = try viewContext.fetch(fetchRequest).first!
-                timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            let writingPath = try viewContext.fetch(fetchRequest).first!
+                timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
                     let trueNorth = manager.heading!.trueHeading
-                    //print(trueNorth)
+                    timerCounter+=1
+                    if timerCounter==2{
+                        // 保存图像
+                        guard let currentFrame = arView.session.currentFrame else{
+                            return}
+                        let image = CIImage(cvPixelBuffer: currentFrame.capturedImage)
+                        let context = CIContext(options: nil)
+                        if let cgImage = context.createCGImage(image, from: image.extent) {
+                            let uiImage = UIImage(cgImage: cgImage)
+                           // print(uiImage.size)
+                            saveImageLocally(image: uiImage, fileName: pathName)
+                        }
+                        else{
+                            print("picture not saved!")
+                        }
+                    }
                     if createNode{
                         pathLength += 1
-                        if pathLength == 1 {
-                            //保存初始方向
-                            originalNorth = trueNorth
-                            //print(originalNorth)
-                            if writingPath.value(forKey: "initdirection") is Double {
-                                writingPath.setValue(originalNorth, forKey: "initdirection")
-                            }
-                            // 保存图像
-                            guard let currentFrame = arView.session.currentFrame else{ return}
-                            let image = CIImage(cvPixelBuffer: currentFrame.capturedImage)
-                            let context = CIContext(options: nil)
-                            if let cgImage = context.createCGImage(image, from: image.extent) {
-                                let uiImage = UIImage(cgImage: cgImage)
-                                saveImageLocally(image: uiImage, fileName: pathName)
-                            }
-                            else{
-                                print("picture not saved!")
-                            }
-                        }
-                        
                         let Xcoord = arView.cameraTransform.translation.x
                         let Zcoord = arView.cameraTransform.translation.z
                         // let Ycoord = arView.cameraTransform.translation.y     //高度记录
-                        
-                        //方向角度差
-                        let delta = (trueNorth - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
-                        let deltaNorth = delta < -180 ? delta + 360 : delta
-                        let floatDeltaNorth = Float(deltaNorth)
                         
                         //坐标
                         if var coordStack = writingPath.value(forKey: "position") as? [[Float]] {
                             coordStack.append([Xcoord,-0.5,Zcoord])
                             writingPath.setValue(coordStack, forKey: "position")
                         }
-                        //角度偏差
-                        if var angleStack = writingPath.value(forKey: "anglediff") as? [Float] {
-                            angleStack.append(floatDeltaNorth)
-                            writingPath.setValue(angleStack, forKey: "anglediff")
+                        //指南针度数
+                        if var trueNorthStack = writingPath.value(forKey: "truenorth") as? [Double] {
+                            trueNorthStack.append(trueNorth)
+                            writingPath.setValue(trueNorthStack, forKey: "truenorth")
                         }
                         //路径点方向
                         if var directionStack = writingPath.value(forKey: "direction") as? [String] {
@@ -98,8 +87,7 @@ struct AddPathContainer: UIViewRepresentable
                             writingPath.setValue(pathLength, forKey: "pathlength")
                         }
                         
-//                        returndata = String(Xcoord.floatValue)+" "+String(Zcoord.floatValue)
-                        returndata = String(Xcoord)+" "+String(Zcoord)
+                        returndata = "目前坐标:"+String(Xcoord)+" "+String(Zcoord)
                         createNode = false
                     }
                 }

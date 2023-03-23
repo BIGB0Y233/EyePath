@@ -16,9 +16,8 @@ extension Path {
         return NSFetchRequest<Path>(entityName: "Path")
     }
 
-    @NSManaged public var anglediff: [Float]?
+    @NSManaged public var truenorth: [Double]?
     @NSManaged public var direction: [String]?
-    @NSManaged public var initdirection: Double
     @NSManaged public var pathdescription: String?
     @NSManaged public var pathname: String?
     @NSManaged public var position: [[Float]]?

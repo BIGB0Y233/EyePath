@@ -20,6 +20,7 @@ struct arViewer: View{
     @State var currentCoordinate: SIMD3<Float> = [0.0,0.0,0.0]
     @State var nextCoordinate: SIMD3<Float> = [100.0,100.0,100.0]
     @State var distance: Float = 0.0
+    @State var displayTrueNorth: Double = 0.0
     @State var index: Int = 0
     @State private var result = ""
 
@@ -27,17 +28,18 @@ struct arViewer: View{
     let modelPos:[SIMD3<Float>]
     let modelName:[String]
     let pathLength: Int
-    let deltaNorth:[Float]
+    let trueNorth:[Double]
 
         var body: some View {
             NavigationStack{
                 ZStack{
-                    ARViewContainer(timer: $timer, stopFlag: $stopFlag, arrived: $result, pathLength: pathLength, modelPos: modelPos, modelName: modelName, deltaNorth: deltaNorth,currentCoordinate: $currentCoordinate, nextCoordinate: $nextCoordinate, distance: $distance, index: $index).edgesIgnoringSafeArea(.all)
+                    ARViewContainer(timer: $timer, stopFlag: $stopFlag, arrived: $result, pathLength: pathLength, modelPos: modelPos, modelName: modelName, trueNorth: trueNorth,currentCoordinate: $currentCoordinate, nextCoordinate: $nextCoordinate, distance: $distance, index: $index, displayTrueNorth: $displayTrueNorth).edgesIgnoringSafeArea(.all)
                     VStack{
                         Text("目前坐标:" + String(describing: currentCoordinate)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
                         Text("下个点坐标:" + String(describing: nextCoordinate)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
                         Text("相差距离:" + String(describing: distance)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
-                        Text("index:" + String(describing: index)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
+                        Text("下个点方向:" + String(describing: displayTrueNorth)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
+                        Text("目前已到达:" + String(describing: index)+"/\(pathLength)").frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
                         Button("结束") {
                             stopFlag = true
                             result = "已结束导航"
@@ -60,7 +62,7 @@ struct arViewer: View{
 
 struct arViewer_Previews: PreviewProvider {
     static var previews: some View {
-        arViewer(modelPos: [[0.0,0.0,0.0]],modelName: ["straight"], pathLength: 0, deltaNorth: [0.0])
+        arViewer(modelPos: [[0.0,0.0,0.0]],modelName: ["startingpoint"], pathLength: 0, trueNorth: [0.0])
     }
 }
 }

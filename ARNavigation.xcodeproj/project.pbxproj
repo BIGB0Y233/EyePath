@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		430A434029C6D81B00652B12 /* left.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A433D29C6D81B00652B12 /* left.reality */; };
-		430A434129C6D81B00652B12 /* right.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A433E29C6D81B00652B12 /* right.reality */; };
-		430A434229C6D81B00652B12 /* straight.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A433F29C6D81B00652B12 /* straight.reality */; };
 		430A437C29C6DF6A00652B12 /* 米.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436A29C6DF6A00652B12 /* 米.wav */; };
 		430A437D29C6DF6A00652B12 /* 右转.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436B29C6DF6A00652B12 /* 右转.wav */; };
 		430A437E29C6DF6A00652B12 /* 一.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436C29C6DF6A00652B12 /* 一.wav */; };
@@ -30,12 +27,22 @@
 		430A441829C9514200652B12 /* Path+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441629C9514200652B12 /* Path+CoreDataClass.swift */; };
 		430A441929C9514200652B12 /* Path+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441729C9514200652B12 /* Path+CoreDataProperties.swift */; };
 		430A441B29C966EB00652B12 /* PathDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441A29C966EB00652B12 /* PathDetailView.swift */; };
-		430A442629CAD9F200652B12 /* destination.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A442529CAD9F200652B12 /* destination.reality */; };
-		430A442929CAF98C00652B12 /* 直行.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A442729CAF98C00652B12 /* 直行.wav */; };
+		430A442B29CB191C00652B12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695AA29B87B5600A4E59C /* ContentView.swift */; };
+		430A443B29CB48FB00652B12 /* destination.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A443729CB48FB00652B12 /* destination.reality */; };
+		430A443C29CB48FB00652B12 /* straight.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A443829CB48FB00652B12 /* straight.reality */; };
+		430A443D29CB48FB00652B12 /* right.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A443929CB48FB00652B12 /* right.reality */; };
+		430A443E29CB48FB00652B12 /* left.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A443A29CB48FB00652B12 /* left.reality */; };
+		430A444229CC05B100652B12 /* startingpoint.reality in Resources */ = {isa = PBXBuildFile; fileRef = 430A444129CC05B100652B12 /* startingpoint.reality */; };
+		430A444A29CC8EB600652B12 /* CGImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A444929CC8EB600652B12 /* CGImageExtension.swift */; };
+		430A444F29CC8F1300652B12 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A444C29CC8F1300652B12 /* CameraManager.swift */; };
+		430A445029CC8F1300652B12 /* CameraError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A444D29CC8F1300652B12 /* CameraError.swift */; };
+		430A445129CC8F1300652B12 /* FrameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A444E29CC8F1300652B12 /* FrameManager.swift */; };
+		430A445329CC8F2300652B12 /* FrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A445229CC8F2300652B12 /* FrameModel.swift */; };
+		430A445529CC916900652B12 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A445429CC916900652B12 /* ErrorView.swift */; };
+		430A445729CC96C900652B12 /* ImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A445629CC96C900652B12 /* ImageTool.swift */; };
 		438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A329B87B5600A4E59C /* ARNavigationApp.swift */; };
 		438695A629B87B5600A4E59C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A529B87B5600A4E59C /* Persistence.swift */; };
 		438695A929B87B5600A4E59C /* ARNavigation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 438695A729B87B5600A4E59C /* ARNavigation.xcdatamodeld */; };
-		438695AB29B87B5600A4E59C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695AA29B87B5600A4E59C /* ContentView.swift */; };
 		438695AD29B87B5800A4E59C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 438695AC29B87B5800A4E59C /* Assets.xcassets */; };
 		438695B129B87B5800A4E59C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 438695B029B87B5800A4E59C /* Preview Assets.xcassets */; };
 		438695BB29B87B5800A4E59C /* ARNavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695BA29B87B5800A4E59C /* ARNavigationTests.swift */; };
@@ -68,9 +75,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		430A433D29C6D81B00652B12 /* left.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = left.reality; sourceTree = "<group>"; };
-		430A433E29C6D81B00652B12 /* right.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = right.reality; sourceTree = "<group>"; };
-		430A433F29C6D81B00652B12 /* straight.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = straight.reality; sourceTree = "<group>"; };
 		430A436A29C6DF6A00652B12 /* 米.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "米.wav"; sourceTree = "<group>"; };
 		430A436B29C6DF6A00652B12 /* 右转.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "右转.wav"; sourceTree = "<group>"; };
 		430A436C29C6DF6A00652B12 /* 一.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "一.wav"; sourceTree = "<group>"; };
@@ -91,8 +95,18 @@
 		430A441629C9514200652B12 /* Path+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataClass.swift"; sourceTree = "<group>"; };
 		430A441729C9514200652B12 /* Path+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		430A441A29C966EB00652B12 /* PathDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathDetailView.swift; sourceTree = "<group>"; };
-		430A442529CAD9F200652B12 /* destination.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = destination.reality; sourceTree = "<group>"; };
-		430A442729CAF98C00652B12 /* 直行.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "直行.wav"; sourceTree = "<group>"; };
+		430A443729CB48FB00652B12 /* destination.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = destination.reality; sourceTree = "<group>"; };
+		430A443829CB48FB00652B12 /* straight.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = straight.reality; sourceTree = "<group>"; };
+		430A443929CB48FB00652B12 /* right.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = right.reality; sourceTree = "<group>"; };
+		430A443A29CB48FB00652B12 /* left.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = left.reality; sourceTree = "<group>"; };
+		430A444129CC05B100652B12 /* startingpoint.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = startingpoint.reality; sourceTree = "<group>"; };
+		430A444929CC8EB600652B12 /* CGImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImageExtension.swift; sourceTree = "<group>"; };
+		430A444C29CC8F1300652B12 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		430A444D29CC8F1300652B12 /* CameraError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraError.swift; sourceTree = "<group>"; };
+		430A444E29CC8F1300652B12 /* FrameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameManager.swift; sourceTree = "<group>"; };
+		430A445229CC8F2300652B12 /* FrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameModel.swift; sourceTree = "<group>"; };
+		430A445429CC916900652B12 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		430A445629CC96C900652B12 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
 		4363453A29C1800A00ACFA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		438695A029B87B5600A4E59C /* ARNavigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARNavigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		438695A329B87B5600A4E59C /* ARNavigationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationApp.swift; sourceTree = "<group>"; };
@@ -141,21 +155,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		430A436829C6DE5D00652B12 /* ARModel */ = {
-			isa = PBXGroup;
-			children = (
-				430A442529CAD9F200652B12 /* destination.reality */,
-				430A433D29C6D81B00652B12 /* left.reality */,
-				430A433E29C6D81B00652B12 /* right.reality */,
-				430A433F29C6D81B00652B12 /* straight.reality */,
-			);
-			path = ARModel;
-			sourceTree = "<group>";
-		};
 		430A436929C6DF6A00652B12 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				430A442729CAF98C00652B12 /* 直行.wav */,
 				430A436A29C6DF6A00652B12 /* 米.wav */,
 				430A436B29C6DF6A00652B12 /* 右转.wav */,
 				430A436C29C6DF6A00652B12 /* 一.wav */,
@@ -185,6 +187,31 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
+		430A443629CB48FB00652B12 /* ARModel */ = {
+			isa = PBXGroup;
+			children = (
+				430A443729CB48FB00652B12 /* destination.reality */,
+				430A443829CB48FB00652B12 /* straight.reality */,
+				430A444129CC05B100652B12 /* startingpoint.reality */,
+				430A443929CB48FB00652B12 /* right.reality */,
+				430A443A29CB48FB00652B12 /* left.reality */,
+			);
+			name = ARModel;
+			path = ARNavigation/ARModel;
+			sourceTree = SOURCE_ROOT;
+		};
+		430A444B29CC8EFC00652B12 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				430A444D29CC8F1300652B12 /* CameraError.swift */,
+				430A444C29CC8F1300652B12 /* CameraManager.swift */,
+				430A445229CC8F2300652B12 /* FrameModel.swift */,
+				430A444E29CC8F1300652B12 /* FrameManager.swift */,
+			);
+			name = Camera;
+			path = ARNavigation/Camera;
+			sourceTree = SOURCE_ROOT;
+		};
 		4386959729B87B5600A4E59C = {
 			isa = PBXGroup;
 			children = (
@@ -208,9 +235,10 @@
 		438695A229B87B5600A4E59C /* ARNavigation */ = {
 			isa = PBXGroup;
 			children = (
+				430A444B29CC8EFC00652B12 /* Camera */,
+				430A443629CB48FB00652B12 /* ARModel */,
 				430A440F29C8496200652B12 /* DataModel */,
 				430A436929C6DF6A00652B12 /* Sounds */,
-				430A436829C6DE5D00652B12 /* ARModel */,
 				438695E229B885B400A4E59C /* AddPath */,
 				438695D429B885B400A4E59C /* Navigation */,
 				438695DB29B885B400A4E59C /* Utilities */,
@@ -254,6 +282,7 @@
 		438695D429B885B400A4E59C /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				430A445429CC916900652B12 /* ErrorView.swift */,
 				438695D629B885B400A4E59C /* compareView.swift */,
 				438695D729B885B400A4E59C /* arViewer.swift */,
 				438695D929B885B400A4E59C /* ARViewContainer.swift */,
@@ -265,8 +294,10 @@
 		438695DB29B885B400A4E59C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				430A444929CC8EB600652B12 /* CGImageExtension.swift */,
 				438695DC29B885B400A4E59C /* BlurView.swift */,
 				438695DD29B885B400A4E59C /* soundProcess.swift */,
+				430A445629CC96C900652B12 /* ImageTool.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -392,21 +423,21 @@
 				430A438829C6DF6A00652B12 /* 五.wav in Resources */,
 				430A438D29C6DF6A00652B12 /* 九.wav in Resources */,
 				430A438029C6DF6A00652B12 /* 六.wav in Resources */,
-				430A442629CAD9F200652B12 /* destination.reality in Resources */,
+				430A443D29CB48FB00652B12 /* right.reality in Resources */,
 				430A437D29C6DF6A00652B12 /* 右转.wav in Resources */,
 				438695B129B87B5800A4E59C /* Preview Assets.xcassets in Resources */,
+				430A443B29CB48FB00652B12 /* destination.reality in Resources */,
 				430A437C29C6DF6A00652B12 /* 米.wav in Resources */,
-				430A434229C6D81B00652B12 /* straight.reality in Resources */,
 				438695AD29B87B5800A4E59C /* Assets.xcassets in Resources */,
-				430A442929CAF98C00652B12 /* 直行.wav in Resources */,
 				430A437E29C6DF6A00652B12 /* 一.wav in Resources */,
-				430A434029C6D81B00652B12 /* left.reality in Resources */,
 				430A437F29C6DF6A00652B12 /* 七.wav in Resources */,
 				430A438329C6DF6A00652B12 /* 八.wav in Resources */,
+				430A443E29CB48FB00652B12 /* left.reality in Resources */,
 				430A438229C6DF6A00652B12 /* 继续直行.wav in Resources */,
+				430A444229CC05B100652B12 /* startingpoint.reality in Resources */,
+				430A443C29CB48FB00652B12 /* straight.reality in Resources */,
 				430A438629C6DF6A00652B12 /* 十.wav in Resources */,
 				430A438529C6DF6A00652B12 /* 二.wav in Resources */,
-				430A434129C6D81B00652B12 /* right.reality in Resources */,
 				430A438129C6DF6A00652B12 /* 靠近.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,17 +467,24 @@
 				438695A929B87B5600A4E59C /* ARNavigation.xcdatamodeld in Sources */,
 				438695E829B885B400A4E59C /* compareView.swift in Sources */,
 				430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */,
+				430A445729CC96C900652B12 /* ImageTool.swift in Sources */,
+				430A445529CC916900652B12 /* ErrorView.swift in Sources */,
+				430A445329CC8F2300652B12 /* FrameModel.swift in Sources */,
 				438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */,
+				430A445029CC8F1300652B12 /* CameraError.swift in Sources */,
 				430A441829C9514200652B12 /* Path+CoreDataClass.swift in Sources */,
-				438695AB29B87B5600A4E59C /* ContentView.swift in Sources */,
 				438695EB29B885B400A4E59C /* ARViewContainer.swift in Sources */,
 				430A441B29C966EB00652B12 /* PathDetailView.swift in Sources */,
 				438695ED29B885B400A4E59C /* BlurView.swift in Sources */,
 				438695E929B885B400A4E59C /* arViewer.swift in Sources */,
 				438695F429B885B400A4E59C /* AddPathView.swift in Sources */,
+				430A445129CC8F1300652B12 /* FrameManager.swift in Sources */,
+				430A444A29CC8EB600652B12 /* CGImageExtension.swift in Sources */,
+				430A442B29CB191C00652B12 /* ContentView.swift in Sources */,
 				430A441929C9514200652B12 /* Path+CoreDataProperties.swift in Sources */,
 				438695EE29B885B400A4E59C /* soundProcess.swift in Sources */,
 				438695A629B87B5600A4E59C /* Persistence.swift in Sources */,
+				430A444F29CC8F1300652B12 /* CameraManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

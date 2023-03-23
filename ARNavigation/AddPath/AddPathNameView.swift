@@ -59,7 +59,7 @@ struct AddPathNameView: View {
                // NavigationLink(destination: AddPathView(pathName: $pathName), isActive: $readytoAdd) { EmptyView() }
                 .navigationDestination(isPresented: $readytoAdd)
                 {
-                    AddPathView(pathName: $pathName)
+                    AddPathView(pathName: pathName)
                     EmptyView()
                 }
         }
@@ -89,8 +89,8 @@ struct AddPathNameView: View {
         newPath.pathdescription = pathDescription
         //Transformable数据需要赋初值
         newPath.position = [[0.0,0.0,0.0]]
-        newPath.anglediff = [0.0]
-        newPath.direction = ["destination"]
+        newPath.truenorth = [0.0]
+        newPath.direction = ["startingpoint"]
         do {
             try viewContext.save()
             readytoAdd = true

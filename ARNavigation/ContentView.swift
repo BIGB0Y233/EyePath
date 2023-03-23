@@ -26,13 +26,8 @@ struct ContentView: View {
                     ForEach(myPath) { path in
                         NavigationLink {
                             PathDetailView(name: path.pathname ?? "default")
-                            //                                Text(String(path.initdirection))
-                            //                                Text(String(path.pathlength))
-                            //                                Text(path.anglediff?.last?.stringValue ?? "114514")
-                            //                                Text(path.position?.last?.last?.stringValue ?? "114524")
-                            //                                Text(path.direction?.last ?? "114534")
                         } label: {
-                            Text(path.pathname ?? "114")
+                            Text(path.pathname ?? "default")
                         }
                     }
                     .onDelete(perform: deletePath)
@@ -66,16 +61,6 @@ struct ContentView: View {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
-        }
-    }
-    
-    private func deleteImage(imageName:String){
-        let fileManager = FileManager.default
-        do {
-            let imagePath = URL(fileURLWithPath: NSHomeDirectory()+"/Documents/\(imageName)")
-            try fileManager.removeItem(at: imagePath)
-        } catch {
-            print("Error while deleting file: \(error.localizedDescription)")
         }
     }
 }
