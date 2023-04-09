@@ -16,23 +16,24 @@ struct AddPathNameView: View {
     @State private var pathDescription: String = ""
     @State private var showAlert = false
     @State private var readytoAdd = false
+    @AppStorage("addMode") var selectedMode = 0
     
     var body: some View {
         NavigationStack {
                 VStack {
-                    Text("🚶添加新路径").font(.largeTitle)
+                    Text("🚶添加新路径").font(.largeTitle).padding(50)
                     
                     TextField("路径名称", text: $pathName)
                         .padding()
-                        .background(Color.white)
+                        .background(Color(uiColor: .systemGray6))
                         .cornerRadius(5.0)
-                        .padding(.bottom, 20)
+                        .padding(20)
                     
                     TextField("描述(可选)", text: $pathDescription)
                         .padding()
-                        .background(Color.white)
+                        .background(Color(uiColor: .systemGray6))
                         .cornerRadius(5.0)
-                        .padding(.bottom, 20)
+                        .padding(20)
                     
                     Button(action: {
                         // TODO: 开始添加路径
@@ -51,15 +52,20 @@ struct AddPathNameView: View {
                             .frame(width: 220, height: 60)
                             .background(Color.blue)
                             .cornerRadius(15.0)
+                            .padding(50)
                     }.alert(isPresented: $showAlert) {
                         Alert(title: Text("⚠️打咩"), message: Text("名称为空或已存在"), dismissButton: .default(Text("Got it!")))
                     }
                     Spacer()
                 }
-               // NavigationLink(destination: AddPathView(pathName: $pathName), isActive: $readytoAdd) { EmptyView() }
                 .navigationDestination(isPresented: $readytoAdd)
                 {
-                    AddPathView(pathName: pathName)
+                    if selectedMode==0{
+                        AutoAddPathView(pathName: pathName)
+                    }
+                    else{
+                        AddPathView(pathName: pathName)
+                    }
                     EmptyView()
                 }
         }
@@ -91,6 +97,7 @@ struct AddPathNameView: View {
         newPath.position = [[0.0,0.0,0.0]]
         newPath.truenorth = [0.0]
         newPath.direction = ["startingpoint"]
+        newPath.timestamp = Date()
         do {
             try viewContext.save()
             readytoAdd = true

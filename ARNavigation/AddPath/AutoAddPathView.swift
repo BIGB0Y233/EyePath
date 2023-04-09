@@ -1,24 +1,23 @@
 //
-//  pathFinder.swift
-//  EyePath
+//  AutoAddPathView.swift
+//  ARNavigation
 //
-//  Created by Allan Shi on 2022/7/8.
+//  Created by ck on 2023/3/24.
 //
+
 import Foundation
 import SwiftUI
 import RealityKit
 import CoreData
 import AudioToolbox
 
-struct AddPathView: View {
+struct AutoAddPathView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
     //MARK: - create Node paramiters
     @State var displayData = "tap on direction buttons to start"
     @State var timerCounter = 0
-    @State var createNode = false
-    @State var modelName = "startingpoint"
     @State var pathLength = 0
     
     //MARK: - 进程控制
@@ -33,34 +32,13 @@ struct AddPathView: View {
         NavigationStack {
             ZStack{
                 ZStack{
-                    AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength, timerCounter: $timerCounter).edgesIgnoringSafeArea(.all)
+                    AutoAddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: pathName, pathLength: $pathLength, timerCounter: $timerCounter).edgesIgnoringSafeArea(.all)
                     ZStack{
-                        blurView(style: .light).frame(width: 320, height: 320, alignment: .center).clipShape(RoundedRectangle(cornerRadius: 8))
+                        blurView(style: .light).frame(width: 320, height: 200, alignment: .center).clipShape(RoundedRectangle(cornerRadius: 8))
                         VStack{
-                            HStack{
-                                Button(action: {createNode=true
-                                    modelName = "left"
-                                    AudioServicesPlaySystemSound(1519)
-                                }
-                                ){Text("⬅️").font(.system(size: 50)).padding(20)}
-                                Button(action: {createNode=true
-                                    modelName = "straight"
-                                    AudioServicesPlaySystemSound(1519)
-                                }
-                                ){Text("⬆️").font(.system(size: 50)).padding(20)}
-                                
-                                Button(action: {createNode=true
-                                    modelName = "right"
-                                    AudioServicesPlaySystemSound(1519)
-                                }
-                                ){Text("➡️").font(.system(size: 50)).padding(20)}
-                            }
-                            HStack{
-                                Button(action: {createNode=true
-                                    modelName = "destination"
-                                    AudioServicesPlaySystemSound(1520)
-                                }
-                                ){Text("🏁").font(.system(size: 50)).padding(20)}
+                            Text("记录坐标:\(displayData)").foregroundColor(.black).frame(width: 400, height: 20, alignment: .center)
+                            Text("已记录点数：\(pathLength)").foregroundColor(.black).frame(width: 400, height: 20, alignment: .center)
+                            Text("时间：\(String(timerCounter/2))s").foregroundColor(.black).frame(width: 400, height: 20, alignment: .center)
                                 Button(action: {
                                     stopFlag = true
                                     timer?.invalidate()
@@ -89,12 +67,8 @@ struct AddPathView: View {
                                         .frame(width: 100, height: 50)
                                         .background(Color.red)
                                         .cornerRadius(15.0)
-                                        .padding(20)
+                                        .padding(10)
                                 }
-                            }
-                            Text("记录坐标:\(displayData)").foregroundColor(.black).frame(width: 400, height: 20, alignment: .center)
-                            Text("已记录点数：\(pathLength)").foregroundColor(.black).frame(width: 400, height: 20, alignment: .center)
-                            Text("时间：\(String(timerCounter/2))s").foregroundColor(.black).frame(width: 400, height: 20, alignment: .center)
                         }
                     }
                 }.alert(isPresented: $stopFlag) {
@@ -102,7 +76,6 @@ struct AddPathView: View {
                         navigateToNextView = true
                     })
                 }
-//                NavigationLink(destination: ContentView(), isActive: $navigateToNextView) { EmptyView() }
                 .navigationDestination(isPresented: $navigateToNextView)
                         {
                              ContentView()
@@ -113,9 +86,8 @@ struct AddPathView: View {
     }
 }
 
-
-struct AddPathView_Previews: PreviewProvider {
+struct AutoAddPathView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPathView(pathName: "default")
+        AutoAddPathView(pathName: "untitled")
     }
 }

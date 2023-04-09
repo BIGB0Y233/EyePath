@@ -14,8 +14,9 @@ struct compareView: View {
     //MARK: -判断是否开始
     @State var shouldStart = false
     //MARK: - 路线数据
-    let pathName : String  //路线名称
-    @State var pathLength = 0   //路线长度
+    let thepath: FetchedResults<Path>.Element
+    
+    @State var pathLength:Int = 0   //路线长度
     @State var modelPos:[SIMD3<Float>]=[]   //模型坐标
     @State var trueNorth:[Double]=[]    //磁力计角度
     @State var ModelName:[String]=[]    //模型名称
@@ -25,13 +26,15 @@ struct compareView: View {
     var body: some View {
         ZStack{
             VStack{
-                Text("调整你所站位置和面向的方位\n（两个画面越接近越好）")
+                Text("初始位置校准：\n（调整你面向的方位，使两个画面接近）").frame(
+                    maxWidth: .infinity,
+                    alignment: .center).multilineTextAlignment(.center)
                 Text("👇").font(.largeTitle).onAppear{
                     DispatchQueue.main.async {
                         loadPathData()
                     }}.padding(20)
                 HStack{
-                    Image(uiImage: loadImageFromPath(path: pathName))
+                    Image(uiImage: loadImageFromPath(path: thepath.pathname!))
                         .resizable()
                         .scaledToFit()
                         .frame(
@@ -75,10 +78,7 @@ struct compareView: View {
     
     //MARK: - 读取路线数据
     func loadPathData(){
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Path")
-        fetchRequest.predicate = NSPredicate(format: "pathname == %@", pathName)
-        do {
-            let readingPath = try viewContext.fetch(fetchRequest).first!
+            let readingPath = thepath
             //路径点位置
             if let fetchingPos = readingPath.value(forKey: "position") as? [[Float]] {
                 for eachPos in fetchingPos
@@ -87,36 +87,15 @@ struct compareView: View {
                     modelPos.append(posVect3)
                 }
             }
-            //路径点角度差
-            if let fetchingTrueNorth = readingPath.value(forKey: "truenorth") as? [Double] {
-                for eachTrueNorth in fetchingTrueNorth
-                {
-                    trueNorth.append(eachTrueNorth)
-                }
-            }
-            //路径点箭头方向
-            if let fetchingDirection = readingPath.value(forKey: "direction") as? [String] {
-                for eachDirection in fetchingDirection
-                {
-                    ModelName.append(eachDirection)
-                }
-            }
-            
-            if let fetchingPathLength = readingPath.value(forKey: "pathlength") as? Int {
-                    pathLength = fetchingPathLength
-            }
-        }
-        catch let error as NSError {
-            print("path fetching failed!")
-            fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
+            trueNorth = readingPath.truenorth!
+            ModelName = readingPath.direction!
+            pathLength = Int(readingPath.pathlength)
     }
-        
-}
 
-struct compassView_Previews: PreviewProvider {
-    static var previews: some View {
-        compareView(pathName: "1123")
-    }
+
+//struct compassView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        compareView(pathName: "1123")
+//    }
 }
 

@@ -55,6 +55,11 @@
 		438695EE29B885B400A4E59C /* soundProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695DD29B885B400A4E59C /* soundProcess.swift */; };
 		438695F329B885B400A4E59C /* AddPathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695E329B885B400A4E59C /* AddPathContainer.swift */; };
 		438695F429B885B400A4E59C /* AddPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695E429B885B400A4E59C /* AddPathView.swift */; };
+		43BD50D029CD488600286FA0 /* AutoAddPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50CF29CD488600286FA0 /* AutoAddPathView.swift */; };
+		43BD50D229CD4BE900286FA0 /* AutoAddPathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50D129CD4BE900286FA0 /* AutoAddPathContainer.swift */; };
+		43BD50D829CDA3F000286FA0 /* pointer.reality in Resources */ = {isa = PBXBuildFile; fileRef = 43BD50D729CDA3F000286FA0 /* pointer.reality */; };
+		43BD50DC29CDCCF100286FA0 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50DB29CDCCF100286FA0 /* ModeSelectionView.swift */; };
+		43F98E3729CC9D240033D1BD /* 直行.wav in Resources */ = {isa = PBXBuildFile; fileRef = 43F98E3629CC9D240033D1BD /* 直行.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,7 +113,7 @@
 		430A445429CC916900652B12 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		430A445629CC96C900652B12 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
 		4363453A29C1800A00ACFA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		438695A029B87B5600A4E59C /* ARNavigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARNavigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		438695A029B87B5600A4E59C /* EyePath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyePath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		438695A329B87B5600A4E59C /* ARNavigationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationApp.swift; sourceTree = "<group>"; };
 		438695A529B87B5600A4E59C /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		438695A829B87B5600A4E59C /* ARNavigation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ARNavigation.xcdatamodel; sourceTree = "<group>"; };
@@ -128,6 +133,11 @@
 		438695DD29B885B400A4E59C /* soundProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soundProcess.swift; sourceTree = "<group>"; };
 		438695E329B885B400A4E59C /* AddPathContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPathContainer.swift; sourceTree = "<group>"; };
 		438695E429B885B400A4E59C /* AddPathView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPathView.swift; sourceTree = "<group>"; };
+		43BD50CF29CD488600286FA0 /* AutoAddPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAddPathView.swift; sourceTree = "<group>"; };
+		43BD50D129CD4BE900286FA0 /* AutoAddPathContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAddPathContainer.swift; sourceTree = "<group>"; };
+		43BD50D729CDA3F000286FA0 /* pointer.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = pointer.reality; sourceTree = "<group>"; };
+		43BD50DB29CDCCF100286FA0 /* ModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectionView.swift; sourceTree = "<group>"; };
+		43F98E3629CC9D240033D1BD /* 直行.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "直行.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +168,7 @@
 		430A436929C6DF6A00652B12 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				43F98E3629CC9D240033D1BD /* 直行.wav */,
 				430A436A29C6DF6A00652B12 /* 米.wav */,
 				430A436B29C6DF6A00652B12 /* 右转.wav */,
 				430A436C29C6DF6A00652B12 /* 一.wav */,
@@ -194,6 +205,7 @@
 				430A443829CB48FB00652B12 /* straight.reality */,
 				430A444129CC05B100652B12 /* startingpoint.reality */,
 				430A443929CB48FB00652B12 /* right.reality */,
+				43BD50D729CDA3F000286FA0 /* pointer.reality */,
 				430A443A29CB48FB00652B12 /* left.reality */,
 			);
 			name = ARModel;
@@ -225,7 +237,7 @@
 		438695A129B87B5600A4E59C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				438695A029B87B5600A4E59C /* ARNavigation.app */,
+				438695A029B87B5600A4E59C /* EyePath.app */,
 				438695B629B87B5800A4E59C /* ARNavigationTests.xctest */,
 				438695C029B87B5800A4E59C /* ARNavigationUITests.xctest */,
 			);
@@ -245,6 +257,7 @@
 				438695A329B87B5600A4E59C /* ARNavigationApp.swift */,
 				438695A529B87B5600A4E59C /* Persistence.swift */,
 				438695AA29B87B5600A4E59C /* ContentView.swift */,
+				43BD50DB29CDCCF100286FA0 /* ModeSelectionView.swift */,
 				4363453A29C1800A00ACFA23 /* Info.plist */,
 				438695AC29B87B5800A4E59C /* Assets.xcassets */,
 				438695AE29B87B5800A4E59C /* ARNavigation.entitlements */,
@@ -306,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				438695E329B885B400A4E59C /* AddPathContainer.swift */,
+				43BD50D129CD4BE900286FA0 /* AutoAddPathContainer.swift */,
+				43BD50CF29CD488600286FA0 /* AutoAddPathView.swift */,
 				438695E429B885B400A4E59C /* AddPathView.swift */,
 				430A441029C84F3700652B12 /* AddPathNameView.swift */,
 			);
@@ -315,9 +330,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4386959F29B87B5600A4E59C /* ARNavigation */ = {
+		4386959F29B87B5600A4E59C /* EyePath */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 438695CA29B87B5800A4E59C /* Build configuration list for PBXNativeTarget "ARNavigation" */;
+			buildConfigurationList = 438695CA29B87B5800A4E59C /* Build configuration list for PBXNativeTarget "EyePath" */;
 			buildPhases = (
 				4386959C29B87B5600A4E59C /* Sources */,
 				4386959D29B87B5600A4E59C /* Frameworks */,
@@ -327,9 +342,9 @@
 			);
 			dependencies = (
 			);
-			name = ARNavigation;
+			name = EyePath;
 			productName = ARNavigation;
-			productReference = 438695A029B87B5600A4E59C /* ARNavigation.app */;
+			productReference = 438695A029B87B5600A4E59C /* EyePath.app */;
 			productType = "com.apple.product-type.application";
 		};
 		438695B529B87B5800A4E59C /* ARNavigationTests */ = {
@@ -391,7 +406,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4386959B29B87B5600A4E59C /* Build configuration list for PBXProject "ARNavigation" */;
+			buildConfigurationList = 4386959B29B87B5600A4E59C /* Build configuration list for PBXProject "EyePath" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -404,7 +419,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4386959F29B87B5600A4E59C /* ARNavigation */,
+				4386959F29B87B5600A4E59C /* EyePath */,
 				438695B529B87B5800A4E59C /* ARNavigationTests */,
 				438695BF29B87B5800A4E59C /* ARNavigationUITests */,
 			);
@@ -418,6 +433,7 @@
 			files = (
 				430A438B29C6DF6A00652B12 /* 三.wav in Resources */,
 				430A438929C6DF6A00652B12 /* 左转.wav in Resources */,
+				43F98E3729CC9D240033D1BD /* 直行.wav in Resources */,
 				430A438C29C6DF6A00652B12 /* 四.wav in Resources */,
 				430A438429C6DF6A00652B12 /* 前方.wav in Resources */,
 				430A438829C6DF6A00652B12 /* 五.wav in Resources */,
@@ -427,6 +443,7 @@
 				430A437D29C6DF6A00652B12 /* 右转.wav in Resources */,
 				438695B129B87B5800A4E59C /* Preview Assets.xcassets in Resources */,
 				430A443B29CB48FB00652B12 /* destination.reality in Resources */,
+				43BD50D829CDA3F000286FA0 /* pointer.reality in Resources */,
 				430A437C29C6DF6A00652B12 /* 米.wav in Resources */,
 				438695AD29B87B5800A4E59C /* Assets.xcassets in Resources */,
 				430A437E29C6DF6A00652B12 /* 一.wav in Resources */,
@@ -468,10 +485,12 @@
 				438695E829B885B400A4E59C /* compareView.swift in Sources */,
 				430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */,
 				430A445729CC96C900652B12 /* ImageTool.swift in Sources */,
+				43BD50DC29CDCCF100286FA0 /* ModeSelectionView.swift in Sources */,
 				430A445529CC916900652B12 /* ErrorView.swift in Sources */,
 				430A445329CC8F2300652B12 /* FrameModel.swift in Sources */,
 				438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */,
 				430A445029CC8F1300652B12 /* CameraError.swift in Sources */,
+				43BD50D029CD488600286FA0 /* AutoAddPathView.swift in Sources */,
 				430A441829C9514200652B12 /* Path+CoreDataClass.swift in Sources */,
 				438695EB29B885B400A4E59C /* ARViewContainer.swift in Sources */,
 				430A441B29C966EB00652B12 /* PathDetailView.swift in Sources */,
@@ -485,6 +504,7 @@
 				438695EE29B885B400A4E59C /* soundProcess.swift in Sources */,
 				438695A629B87B5600A4E59C /* Persistence.swift in Sources */,
 				430A444F29CC8F1300652B12 /* CameraManager.swift in Sources */,
+				43BD50D229CD4BE900286FA0 /* AutoAddPathContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,12 +530,12 @@
 /* Begin PBXTargetDependency section */
 		438695B829B87B5800A4E59C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4386959F29B87B5600A4E59C /* ARNavigation */;
+			target = 4386959F29B87B5600A4E59C /* EyePath */;
 			targetProxy = 438695B729B87B5800A4E59C /* PBXContainerItemProxy */;
 		};
 		438695C229B87B5800A4E59C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4386959F29B87B5600A4E59C /* ARNavigation */;
+			target = 4386959F29B87B5600A4E59C /* EyePath */;
 			targetProxy = 438695C129B87B5800A4E59C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -639,13 +659,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ARNavigation/Preview Content\"";
-				DEVELOPMENT_TEAM = GZ44K8J8CT;
+				DEVELOPMENT_TEAM = 8D99MGNPN4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ARNavigation/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EyePath;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
-				INFOPLIST_KEY_NSCameraUsageDescription = plz;
+				INFOPLIST_KEY_NSCameraUsageDescription = "AR导航需要使用您的摄像头";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "AR导航需要获取您的位置";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -661,7 +683,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = xmu.ARNavigation;
+				PRODUCT_BUNDLE_IDENTIFIER = xmu.EyePath;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -682,13 +704,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ARNavigation/Preview Content\"";
-				DEVELOPMENT_TEAM = GZ44K8J8CT;
+				DEVELOPMENT_TEAM = 8D99MGNPN4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ARNavigation/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EyePath;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
-				INFOPLIST_KEY_NSCameraUsageDescription = plz;
+				INFOPLIST_KEY_NSCameraUsageDescription = "AR导航需要使用您的摄像头";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "AR导航需要获取您的位置";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -704,7 +728,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = xmu.ARNavigation;
+				PRODUCT_BUNDLE_IDENTIFIER = xmu.EyePath;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -809,7 +833,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4386959B29B87B5600A4E59C /* Build configuration list for PBXProject "ARNavigation" */ = {
+		4386959B29B87B5600A4E59C /* Build configuration list for PBXProject "EyePath" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				438695C829B87B5800A4E59C /* Debug */,
@@ -818,7 +842,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		438695CA29B87B5800A4E59C /* Build configuration list for PBXNativeTarget "ARNavigation" */ = {
+		438695CA29B87B5800A4E59C /* Build configuration list for PBXNativeTarget "EyePath" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				438695CB29B87B5800A4E59C /* Debug */,

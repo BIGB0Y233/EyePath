@@ -15,32 +15,38 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Path.timestamp, ascending: true)],
         animation: .default)
     private var myPath: FetchedResults<Path>
+    @State var enableAuto = true
+    @State var isActive : Bool = false
     
-    //MARK: - 添加路径参数
-    @State private var gotoAdd = false
-        
+    //navigationStack path
+//    @State private var uiNavigationPath: [Int] = []
+    
     var body: some View {
             NavigationStack
             {
                 List {
-                    ForEach(myPath) { path in
+                    ForEach(myPath) { everypath in
                         NavigationLink {
-                            PathDetailView(name: path.pathname ?? "default")
+                            PathDetailView(thePath: everypath)
                         } label: {
-                            Text(path.pathname ?? "default")
+                            Text(everypath.pathname ?? "null")
                         }
                     }
                     .onDelete(perform: deletePath)
                 }
-                .toolbar {
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        NavigationLink(destination: ModeSelectionView()) { Label("Preference", systemImage: "line.3.horizontal") }
+                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
                     }
                     ToolbarItem {
                         NavigationLink(destination: AddPathNameView()) { Label("Add Item", systemImage: "plus") }
                     }
-                } .navigationBarTitleDisplayMode(.inline)
+                }
                 .navigationTitle("已保存路径")
+                .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackButtonHidden(true)
             }
     }
@@ -64,13 +70,6 @@ struct ContentView: View {
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

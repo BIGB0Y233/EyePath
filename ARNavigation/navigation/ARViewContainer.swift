@@ -8,6 +8,8 @@
 import SwiftUI
 import ARKit
 import RealityKit
+import CoreLocation
+import AudioToolbox
 import AVKit
 
 
@@ -25,12 +27,12 @@ struct ARViewContainer: UIViewRepresentable{
     let trueNorth:[Double]
 
 //MARK: - 状态显示
-    @Binding var currentCoordinate: SIMD3<Float>
-    @Binding var nextCoordinate: SIMD3<Float>
-    @Binding var distance: Float
+    @Binding var displayDistance: String
     @Binding var index: Int
-    @Binding var displayTrueNorth: Double
+    @Binding var displayDeltaNorth: String
 
+    let manager : CLLocationManager = CLLocationManager()
+    
 //MARK: - AR启动项
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
@@ -39,6 +41,8 @@ struct ARViewContainer: UIViewRepresentable{
         arView.session.run(config)
         let parentEntity = AnchorEntity()
         let originalNorth = trueNorth[1] //初始方向
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingHeading()
       //  var player: AVAudioPlayer?
         //MARK: - 加载模型
         for i in 0..<pathLength+1
@@ -59,16 +63,29 @@ struct ARViewContainer: UIViewRepresentable{
         }
         arView.scene.addAnchor(parentEntity)
         
+//        var currentCoordinate: SIMD3<Float> = [0.0,0.0,0.0]
+//        var nextCoordinate: SIMD3<Float> = [100.0,100.0,100.0]
+        //var distanceStack:[Float] = []
         //MARK: -   启动计时器判断当前位置
         DispatchQueue.main.async {
-        //var distanceStack:[Float] = []
+        
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+            
+            let currentNorth = manager.heading!.trueHeading
+            
             if index < pathLength{
                 //距下一个点距离判断
-                currentCoordinate = arView.cameraTransform.translation
-                nextCoordinate = modelPos[index+1]
-                distance = (pow(nextCoordinate.x - currentCoordinate.x,2)+pow(nextCoordinate.z - currentCoordinate.z,2)).squareRoot()
-                displayTrueNorth = trueNorth[index+1]
+                let currentCoordinate = arView.cameraTransform.translation
+                let nextCoordinate = modelPos[index+1]
+                let nextNorth = trueNorth[index+1]
+                
+                let distance = (pow(nextCoordinate.x - currentCoordinate.x,2)+pow(nextCoordinate.z - currentCoordinate.z,2)).squareRoot()
+                displayDistance = String(format: "%.2f", distance)
+ 
+                
+                let delta = (nextNorth - currentNorth + 180).truncatingRemainder(dividingBy: 360) - 180
+                let deltaNorth = delta < -180 ? delta + 360 : delta
+                displayDeltaNorth = String(format: "%.2f",deltaNorth)
                 
                 // 语音
 //                distanceStack.append(distance)
@@ -93,13 +110,17 @@ struct ARViewContainer: UIViewRepresentable{
                     self.index += 1
                    // distanceStack = []
                     
-                    //到达终点后停止
-//                    if index == pathLength{
+                    //到达终点
+                    if index == pathLength{
+                        arrived = "已到达终点🏁"
+                        AudioServicesPlaySystemSound(1520)
 //                        timer?.invalidate()
 //                        timer = nil
 //                        stopFlag = true
-//                        arrived = "已到达终点🏁"
-//                    }
+                    }
+                    else{
+                        AudioServicesPlaySystemSound(1519)
+                    }
                 }
                
             }

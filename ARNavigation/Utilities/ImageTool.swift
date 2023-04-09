@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+func saveImageLocally(image: UIImage, fileName: String) {
+    // 获取文档目录的位置
+    let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    // 创建一个指向文件名的URL
+    let url = documentsDirectory.appendingPathComponent(fileName)
+    if let data = image.pngData() {
+        do {
+            try data.write(to: url)
+        } catch {
+            print("Error saving image locally")
+        }
+    }
+}
+
 func loadImageFromPath(path: String) -> UIImage {
     let urlString=NSHomeDirectory()+"/Documents/\(path)"
     guard let image = UIImage(contentsOfFile: urlString) else {

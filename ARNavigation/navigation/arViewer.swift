@@ -17,10 +17,8 @@ struct arViewer: View{
     @State var navigateToNextView = false
 
 //MARK: - 状态显示
-    @State var currentCoordinate: SIMD3<Float> = [0.0,0.0,0.0]
-    @State var nextCoordinate: SIMD3<Float> = [100.0,100.0,100.0]
-    @State var distance: Float = 0.0
-    @State var displayTrueNorth: Double = 0.0
+    @State var distance = ""
+    @State var deltaNorth = ""
     @State var index: Int = 0
     @State private var result = ""
 
@@ -33,30 +31,41 @@ struct arViewer: View{
         var body: some View {
             NavigationStack{
                 ZStack{
-                    ARViewContainer(timer: $timer, stopFlag: $stopFlag, arrived: $result, pathLength: pathLength, modelPos: modelPos, modelName: modelName, trueNorth: trueNorth,currentCoordinate: $currentCoordinate, nextCoordinate: $nextCoordinate, distance: $distance, index: $index, displayTrueNorth: $displayTrueNorth).edgesIgnoringSafeArea(.all)
-                    VStack{
-                        Text("目前坐标:" + String(describing: currentCoordinate)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
-                        Text("下个点坐标:" + String(describing: nextCoordinate)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
-                        Text("相差距离:" + String(describing: distance)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
-                        Text("下个点方向:" + String(describing: displayTrueNorth)).frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
-                        Text("目前已到达:" + String(describing: index)+"/\(pathLength)").frame(width: 250, height: 100, alignment: .center).foregroundColor(.mint)
-                        Button("结束") {
-                            stopFlag = true
-                            result = "已结束导航"
-                            timer?.invalidate()
-                            timer = nil
-                        }.foregroundColor(.cyan)
-                    }.alert(isPresented: $stopFlag) {
-                        Alert(title: Text("⚠️"), message: Text(result), dismissButton: .default(Text("Ok")) {
-                            navigateToNextView = true
-                        })
-                    }
-                    .navigationDestination(isPresented: $navigateToNextView)
-                    {
-                        ContentView()
-                        EmptyView()
-                    }
-                }.navigationBarBackButtonHidden(true)
+                    ARViewContainer(timer: $timer, stopFlag: $stopFlag, arrived: $result, pathLength: pathLength, modelPos: modelPos, modelName: modelName, trueNorth: trueNorth, displayDistance: $distance, index: $index, displayDeltaNorth: $deltaNorth).edgesIgnoringSafeArea(.all)
+                        ZStack{
+                            blurView(style: .light).frame(width: 300, height: 80,alignment: .top).clipShape(RoundedRectangle(cornerRadius: 8))
+                            HStack{
+                                VStack{
+                                    Text("距离:\(distance)m").frame(maxHeight: 10).foregroundColor(.black).padding(5)
+                                    Text("方向差:\(deltaNorth)°").frame(maxHeight: 10 ).foregroundColor(.black).padding(5)
+                                    Text("进度:" + String(describing: index)+"/\(pathLength)").frame(maxHeight: 10).foregroundColor(.black).padding(5)
+                                }
+                                Button(action: {
+                                    stopFlag = true
+                                    result = "已结束导航"
+                                    timer?.invalidate()
+                                    timer = nil
+                                }){
+                                    Text("结束")
+                                        .foregroundColor(.white)
+                                        .frame(width: 100, height: 50)
+                                        .background(Color.red)
+                                        .cornerRadius(15.0)
+                                        .padding(10)
+                                }
+                            }
+                        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                }.alert(isPresented: $stopFlag) {
+                    Alert(title: Text("⚠️"), message: Text(result), dismissButton: .default(Text("Ok")) {
+                        navigateToNextView = true
+                    })
+                }
+                .navigationDestination(isPresented: $navigateToNextView)
+                {
+                    ContentView()
+                    EmptyView()
+                }
+                .navigationBarBackButtonHidden(true)
             }
     }
 

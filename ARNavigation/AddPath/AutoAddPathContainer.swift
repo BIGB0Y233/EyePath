@@ -1,8 +1,8 @@
 //
-//  ARContainer.swift
-//  ARLocation
+//  AutoAddPathContainer.swift
+//  ARNavigation
 //
-//  Created by Allan Shi on 2022/4/28.
+//  Created by ck on 2023/3/24.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import RealityKit
 import CoreLocation
 import CoreData
 
-struct AddPathContainer: UIViewRepresentable
+struct AutoAddPathContainer: UIViewRepresentable
 {
     //MARK: - 进程控制
     @Binding var timer: Timer?
@@ -20,8 +20,6 @@ struct AddPathContainer: UIViewRepresentable
     //MARK: - create Node paramiters
     @Binding var returndata: String
     let pathName: String
-    @Binding var createNode: Bool
-    @Binding var modelName: String
     @Binding var pathLength: Int
     @Binding var timerCounter: Int
 
@@ -43,10 +41,10 @@ struct AddPathContainer: UIViewRepresentable
         DispatchQueue.main.async {
             do {
             let writingPath = try viewContext.fetch(fetchRequest).first!
-                timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                     let trueNorth = manager.heading!.trueHeading
                     timerCounter+=1
-                    if timerCounter==2{
+                    if timerCounter==1{
                         // 保存图像
                         guard let currentFrame = arView.session.currentFrame else{
                             return}
@@ -61,7 +59,6 @@ struct AddPathContainer: UIViewRepresentable
                             print("picture not saved!")
                         }
                     }
-                    if createNode{
                         pathLength += 1
                         let Xcoord = arView.cameraTransform.translation.x
                         let Zcoord = arView.cameraTransform.translation.z
@@ -79,7 +76,7 @@ struct AddPathContainer: UIViewRepresentable
                         }
                         //路径点方向
                         if var directionStack = writingPath.value(forKey: "direction") as? [String] {
-                            directionStack.append(modelName)
+                            directionStack.append("pointer")
                             writingPath.setValue(directionStack, forKey: "direction")
                         }
                         //路径长度
@@ -88,8 +85,6 @@ struct AddPathContainer: UIViewRepresentable
                         }
                         
                         returndata = String(Xcoord)+","+String(Zcoord)
-                        createNode = false
-                    }
                 }
             } catch let error as NSError {
                 print("path fetching failed!")

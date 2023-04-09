@@ -6,20 +6,25 @@
 //
 
 import SwiftUI
+import CoreData
+
 struct PathDetailView: View {
-    
-    let name: String
-    
+    let thePath: FetchedResults<Path>.Element
     var body: some View {
-        ScrollView{
+        NavigationStack{
+            ScrollView{
                 VStack {
-                    Image(uiImage: loadImageFromPath(path: name))
+                    Image(uiImage: loadImageFromPath(path: thePath.pathname!))
                         .resizable()
                         .scaledToFit()
-                    Text(name)
+                    Text(thePath.pathname!)
                         .font(.largeTitle)
                         .bold()
-                    NavigationLink(destination: compareView(pathName: name))
+                    Text(thePath.timestamp!, formatter:itemFormatter)
+                        .font(.title2)
+                    Text(thePath.pathdescription ?? "无")
+                        .font(.body)
+                    NavigationLink(destination: compareView(thepath: thePath))
                     {        Text("开始导航")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -28,18 +33,26 @@ struct PathDetailView: View {
                             .background(Color.blue)
                         .cornerRadius(15.0) }
                     Spacer()
-                    //            Text(price)
-                    //                .font(.title2)
                 }
                 .padding()
+            }
+            .navigationTitle("路线详情")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
-struct PathDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        PathDetailView(name: "untitled")
-    }
-}
+private let itemFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .medium
+    return formatter
+}()
+
+//struct PathDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PathDetailView(name: "untitled")
+//    }
+//}
 
 
