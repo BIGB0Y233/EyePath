@@ -25,12 +25,11 @@ struct AddPathView: View {
     @State var timer: Timer?
     @State var stopFlag = false
     @State private var result = ""
-    @State private var navigateToNextView = false
 
     let pathName: String
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack{
                 ZStack{
                     AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength, timerCounter: $timerCounter).edgesIgnoringSafeArea(.all)
@@ -99,15 +98,10 @@ struct AddPathView: View {
                     }
                 }.alert(isPresented: $stopFlag) {
                     Alert(title: Text(result), message: Text("记录完毕"), dismissButton: .default(Text("Ok")) {
-                        navigateToNextView = true
+                        NavigationUtil.popToRootView()
                     })
                 }
 //                NavigationLink(destination: ContentView(), isActive: $navigateToNextView) { EmptyView() }
-                .navigationDestination(isPresented: $navigateToNextView)
-                        {
-                             ContentView()
-                             EmptyView()
-                         }
             }.navigationBarBackButtonHidden(true)
         }
     }

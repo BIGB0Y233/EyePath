@@ -14,7 +14,7 @@ struct ModeSelectionView: View {
     let items = ["自动标记","手动标记"]
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
                 Form {
                     Section(header: Text("语音导航")) {
                         Toggle(isOn: $voiceOn) {

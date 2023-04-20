@@ -40,6 +40,8 @@
 		430A445329CC8F2300652B12 /* FrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A445229CC8F2300652B12 /* FrameModel.swift */; };
 		430A445529CC916900652B12 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A445429CC916900652B12 /* ErrorView.swift */; };
 		430A445729CC96C900652B12 /* ImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A445629CC96C900652B12 /* ImageTool.swift */; };
+		4322781629E4603D00FFB434 /* PoptoRootMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322781529E4603D00FFB434 /* PoptoRootMethod.swift */; };
+		4322781829F1485000FFB434 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322781729F1485000FFB434 /* testView.swift */; };
 		438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A329B87B5600A4E59C /* ARNavigationApp.swift */; };
 		438695A629B87B5600A4E59C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A529B87B5600A4E59C /* Persistence.swift */; };
 		438695A929B87B5600A4E59C /* ARNavigation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 438695A729B87B5600A4E59C /* ARNavigation.xcdatamodeld */; };
@@ -112,6 +114,8 @@
 		430A445229CC8F2300652B12 /* FrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameModel.swift; sourceTree = "<group>"; };
 		430A445429CC916900652B12 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		430A445629CC96C900652B12 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
+		4322781529E4603D00FFB434 /* PoptoRootMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoptoRootMethod.swift; sourceTree = "<group>"; };
+		4322781729F1485000FFB434 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		4363453A29C1800A00ACFA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		438695A029B87B5600A4E59C /* EyePath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyePath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		438695A329B87B5600A4E59C /* ARNavigationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationApp.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 				438695DC29B885B400A4E59C /* BlurView.swift */,
 				438695DD29B885B400A4E59C /* soundProcess.swift */,
 				430A445629CC96C900652B12 /* ImageTool.swift */,
+				4322781529E4603D00FFB434 /* PoptoRootMethod.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 				43BD50CF29CD488600286FA0 /* AutoAddPathView.swift */,
 				438695E429B885B400A4E59C /* AddPathView.swift */,
 				430A441029C84F3700652B12 /* AddPathNameView.swift */,
+				4322781729F1485000FFB434 /* testView.swift */,
 			);
 			path = AddPath;
 			sourceTree = "<group>";
@@ -485,8 +491,10 @@
 				438695E829B885B400A4E59C /* compareView.swift in Sources */,
 				430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */,
 				430A445729CC96C900652B12 /* ImageTool.swift in Sources */,
+				4322781829F1485000FFB434 /* testView.swift in Sources */,
 				43BD50DC29CDCCF100286FA0 /* ModeSelectionView.swift in Sources */,
 				430A445529CC916900652B12 /* ErrorView.swift in Sources */,
+				4322781629E4603D00FFB434 /* PoptoRootMethod.swift in Sources */,
 				430A445329CC8F2300652B12 /* FrameModel.swift in Sources */,
 				438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */,
 				430A445029CC8F1300652B12 /* CameraError.swift in Sources */,
@@ -678,7 +686,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -723,7 +731,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;

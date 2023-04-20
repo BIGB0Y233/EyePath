@@ -17,57 +17,66 @@ struct AddPathNameView: View {
     @State private var showAlert = false
     @State private var readytoAdd = false
     @AppStorage("addMode") var selectedMode = 0
+    @Binding var shouldPresent:Bool
     
     var body: some View {
-        NavigationStack {
-                VStack {
-                    Text("🚶添加新路径").font(.largeTitle).padding(50)
-                    
-                    TextField("路径名称", text: $pathName)
-                        .padding()
-                        .background(Color(uiColor: .systemGray6))
-                        .cornerRadius(5.0)
-                        .padding(20)
-                    
-                    TextField("描述(可选)", text: $pathDescription)
-                        .padding()
-                        .background(Color(uiColor: .systemGray6))
-                        .cornerRadius(5.0)
-                        .padding(20)
-                    
-                    Button(action: {
-                        // TODO: 开始添加路径
-                        if checkConflict() || pathName==""
-                        {
-                            showAlert = true
-                        }
-                        else{
-                            generateNewData()
-                        }
-                    }) {
-                        Text("开始记录路径")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(width: 220, height: 60)
-                            .background(Color.blue)
-                            .cornerRadius(15.0)
-                            .padding(50)
-                    }.alert(isPresented: $showAlert) {
-                        Alert(title: Text("⚠️打咩"), message: Text("名称为空或已存在"), dismissButton: .default(Text("Got it!")))
-                    }
-                    Spacer()
-                }
-                .navigationDestination(isPresented: $readytoAdd)
-                {
-                    if selectedMode==0{
-                        AutoAddPathView(pathName: pathName)
+        NavigationView {
+            VStack {
+                Text("🚶添加新路径").font(.largeTitle).padding(50)
+                TextField("路径名称", text: $pathName)
+                    .padding()
+                    .background(Color(uiColor: .systemGray6))
+                    .cornerRadius(5.0)
+                    .padding(20)
+                
+                TextField("描述(可选)", text: $pathDescription)
+                    .padding()
+                    .background(Color(uiColor: .systemGray6))
+                    .cornerRadius(5.0)
+                    .padding(20)
+                NavigationLink(destination: AutoAddPathView(pathName: pathName,shouldPresent: $shouldPresent), isActive: $readytoAdd) { EmptyView() }.isDetailLink(false)
+                Button(action: {
+                    // TODO: 开始添加路径
+                    if checkConflict() || pathName==""
+                    {
+                        showAlert = true
                     }
                     else{
-                        AddPathView(pathName: pathName)
+                        DispatchQueue.main.async {
+                            generateNewData()
+                        }
                     }
-                    EmptyView()
+                }) {
+                    Text("开始记录路径")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 220, height: 60)
+                        .background(Color.blue)
+                        .cornerRadius(15.0)
+                        .padding(50)
+                }.alert(isPresented: $showAlert) {
+                    Alert(title: Text("⚠️NO"), message: Text("名称为空或已存在!"), dismissButton: .default(Text("Ok")) {
+                    })
                 }
+                .navigationBarItems(leading: Button(action: {
+                    shouldPresent = false
+                }) {
+                    Text("取消")
+                })
+                
+                //                    NavigationLink(destination: AutoAddPathView(pathName: "可以了", shouldPresent: $shouldPresent))
+                //                    {
+                //                        Text("后门")
+                //                    }.isDetailLink(false)
+                //                   Spacer()
+                //                }
+                
+                //                NavigationLink(destination: selectedMode==0 ? AutoAddPathView(pathName: pathName) : AddPathView(pathName: pathName), isActive: $readytoAdd) { EmptyView() }
+                
+                Spacer()
+                
+            }
         }
     }
     
@@ -109,8 +118,8 @@ struct AddPathNameView: View {
     }
 }
 
-struct AddPathNameView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPathNameView()
-    }
-}
+//struct AddPathNameView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddPathNameView()
+//    }
+//}

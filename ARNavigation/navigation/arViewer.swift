@@ -14,7 +14,6 @@ struct arViewer: View{
 //MARK: - 进程控制
     @State var stopFlag = false
     @State var timer: Timer?
-    @State var navigateToNextView = false
 
 //MARK: - 状态显示
     @State var distance = ""
@@ -29,7 +28,6 @@ struct arViewer: View{
     let trueNorth:[Double]
 
         var body: some View {
-            NavigationStack{
                 ZStack{
                     ARViewContainer(timer: $timer, stopFlag: $stopFlag, arrived: $result, pathLength: pathLength, modelPos: modelPos, modelName: modelName, trueNorth: trueNorth, displayDistance: $distance, index: $index, displayDeltaNorth: $deltaNorth).edgesIgnoringSafeArea(.all)
                         ZStack{
@@ -57,16 +55,10 @@ struct arViewer: View{
                         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 }.alert(isPresented: $stopFlag) {
                     Alert(title: Text("⚠️"), message: Text(result), dismissButton: .default(Text("Ok")) {
-                        navigateToNextView = true
+                        NavigationUtil.popToRootView()
                     })
                 }
-                .navigationDestination(isPresented: $navigateToNextView)
-                {
-                    ContentView()
-                    EmptyView()
-                }
                 .navigationBarBackButtonHidden(true)
-            }
     }
 
 struct arViewer_Previews: PreviewProvider {
@@ -75,3 +67,4 @@ struct arViewer_Previews: PreviewProvider {
     }
 }
 }
+

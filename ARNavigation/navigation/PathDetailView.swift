@@ -11,7 +11,6 @@ import CoreData
 struct PathDetailView: View {
     let thePath: FetchedResults<Path>.Element
     var body: some View {
-        NavigationStack{
             ScrollView{
                 VStack {
                     Image(uiImage: loadImageFromPath(path: thePath.pathname!))
@@ -32,13 +31,13 @@ struct PathDetailView: View {
                             .frame(width: 220, height: 60)
                             .background(Color.blue)
                         .cornerRadius(15.0) }
+                    .isDetailLink(false)
+                    .navigationTitle("路线详情")
+                    .navigationBarTitleDisplayMode(.inline)
                     Spacer()
                 }
                 .padding()
             }
-            .navigationTitle("路线详情")
-            .navigationBarTitleDisplayMode(.inline)
-        }
     }
 }
 

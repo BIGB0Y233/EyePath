@@ -12,7 +12,7 @@ struct compareView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     //MARK: -判断是否开始
-    @State var shouldStart = false
+   // @State var shouldStart = false
     //MARK: - 路线数据
     let thepath: FetchedResults<Path>.Element
     
@@ -53,25 +53,19 @@ struct compareView: View {
                         EmptyView()
                     }
                 }.padding(30)
-                Button("已对齐，开始导航"){
-                    frameModel.stopSubscriptions()
-                    shouldStart = true
-                }
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .frame(width: 220, height: 60)
-                .background(Color.blue)
-            .cornerRadius(15.0)
+                NavigationLink(destination: arViewer(modelPos: modelPos, modelName: ModelName, pathLength: pathLength, trueNorth: trueNorth))
+                {        Text("已对齐，开始导航")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(width: 220, height: 60)
+                        .background(Color.blue)
+                    .cornerRadius(15.0) }.isDetailLink(false)
                 Spacer()
             }
             ErrorView(error: frameModel.error)
-            .navigationDestination(isPresented: $shouldStart)
-            {
-                arViewer(modelPos: modelPos, modelName: ModelName, pathLength: pathLength, trueNorth: trueNorth)
-                EmptyView()
-            }
-        }.onDisappear{
+        }
+        .onDisappear{
             frameModel.stopSubscriptions()
         }
     }

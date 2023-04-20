@@ -16,24 +16,28 @@ struct ContentView: View {
         animation: .default)
     private var myPath: FetchedResults<Path>
     @State var enableAuto = true
-    @State var isActive : Bool = false
-    
-    //navigationStack path
-//    @State private var uiNavigationPath: [Int] = []
+    @State var shouldPresent = false
     
     var body: some View {
-            NavigationStack
-            {
-                List {
-                    ForEach(myPath) { everypath in
-                        NavigationLink {
-                            PathDetailView(thePath: everypath)
-                        } label: {
-                            Text(everypath.pathname ?? "null")
-                        }
-                    }
-                    .onDelete(perform: deletePath)
+        NavigationView
+        {
+            GeometryReader{_ in
+                if myPath.isEmpty{
+                    Text("hhhh").frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
+                else{
+                    List {
+                        ForEach(myPath) { everypath in
+                            NavigationLink {
+                                PathDetailView(thePath: everypath)
+                            } label: {
+                                Text(everypath.pathname ?? "null")
+                            }.isDetailLink(false)
+                        }
+                        .onDelete(perform: deletePath)
+                    }
+                }
+            }
                 .toolbar{
                     ToolbarItem(placement: .navigationBarLeading) {
                         NavigationLink(destination: ModeSelectionView()) { Label("Preference", systemImage: "line.3.horizontal") }
@@ -42,13 +46,21 @@ struct ContentView: View {
                         EditButton()
                     }
                     ToolbarItem {
-                        NavigationLink(destination: AddPathNameView()) { Label("Add Item", systemImage: "plus") }
+                        //NavigationLink(destination: AddPathNameView()) { Label("Add Item", systemImage: "plus") }
+                        Button(action: {
+                            shouldPresent = true
+                        }) {
+                            Label("Add Item", systemImage: "plus")
+                        }
+                    .fullScreenCover(isPresented: $shouldPresent) {
+                        AddPathNameView(shouldPresent: $shouldPresent)
+                    }
                     }
                 }
                 .navigationTitle("已保存路径")
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationBarBackButtonHidden(true)
-            }
+        }
+                
     }
     //MARK: - TableViewDelegate Functions
     private func deletePath(offsets: IndexSet) {
