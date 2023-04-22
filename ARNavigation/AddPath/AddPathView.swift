@@ -27,10 +27,9 @@ struct AddPathView: View {
     @State private var result = ""
 
     let pathName: String
+    @Binding var shouldPresent:Bool
     
     var body: some View {
-        NavigationView {
-            ZStack{
                 ZStack{
                     AddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathName: pathName, createNode: $createNode, modelName: $modelName,pathLength: $pathLength, timerCounter: $timerCounter).edgesIgnoringSafeArea(.all)
                     ZStack{
@@ -98,18 +97,15 @@ struct AddPathView: View {
                     }
                 }.alert(isPresented: $stopFlag) {
                     Alert(title: Text(result), message: Text("记录完毕"), dismissButton: .default(Text("Ok")) {
-                        NavigationUtil.popToRootView()
+                        shouldPresent = false
                     })
-                }
-//                NavigationLink(destination: ContentView(), isActive: $navigateToNextView) { EmptyView() }
-            }.navigationBarBackButtonHidden(true)
-        }
+                }.navigationBarBackButtonHidden(true)
     }
 }
 
 
-struct AddPathView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPathView(pathName: "default")
-    }
-}
+//struct AddPathView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddPathView(pathName: "default")
+//    }
+//}

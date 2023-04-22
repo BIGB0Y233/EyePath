@@ -60,7 +60,7 @@
 		43BD50D029CD488600286FA0 /* AutoAddPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50CF29CD488600286FA0 /* AutoAddPathView.swift */; };
 		43BD50D229CD4BE900286FA0 /* AutoAddPathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50D129CD4BE900286FA0 /* AutoAddPathContainer.swift */; };
 		43BD50D829CDA3F000286FA0 /* pointer.reality in Resources */ = {isa = PBXBuildFile; fileRef = 43BD50D729CDA3F000286FA0 /* pointer.reality */; };
-		43BD50DC29CDCCF100286FA0 /* ModeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50DB29CDCCF100286FA0 /* ModeSelectionView.swift */; };
+		43BD50DC29CDCCF100286FA0 /* PrefrenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50DB29CDCCF100286FA0 /* PrefrenceView.swift */; };
 		43F98E3729CC9D240033D1BD /* 直行.wav in Resources */ = {isa = PBXBuildFile; fileRef = 43F98E3629CC9D240033D1BD /* 直行.wav */; };
 /* End PBXBuildFile section */
 
@@ -140,7 +140,7 @@
 		43BD50CF29CD488600286FA0 /* AutoAddPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAddPathView.swift; sourceTree = "<group>"; };
 		43BD50D129CD4BE900286FA0 /* AutoAddPathContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAddPathContainer.swift; sourceTree = "<group>"; };
 		43BD50D729CDA3F000286FA0 /* pointer.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = pointer.reality; sourceTree = "<group>"; };
-		43BD50DB29CDCCF100286FA0 /* ModeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeSelectionView.swift; sourceTree = "<group>"; };
+		43BD50DB29CDCCF100286FA0 /* PrefrenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefrenceView.swift; sourceTree = "<group>"; };
 		43F98E3629CC9D240033D1BD /* 直行.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "直行.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -261,7 +261,7 @@
 				438695A329B87B5600A4E59C /* ARNavigationApp.swift */,
 				438695A529B87B5600A4E59C /* Persistence.swift */,
 				438695AA29B87B5600A4E59C /* ContentView.swift */,
-				43BD50DB29CDCCF100286FA0 /* ModeSelectionView.swift */,
+				43BD50DB29CDCCF100286FA0 /* PrefrenceView.swift */,
 				4363453A29C1800A00ACFA23 /* Info.plist */,
 				438695AC29B87B5800A4E59C /* Assets.xcassets */,
 				438695AE29B87B5800A4E59C /* ARNavigation.entitlements */,
@@ -492,7 +492,7 @@
 				430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */,
 				430A445729CC96C900652B12 /* ImageTool.swift in Sources */,
 				4322781829F1485000FFB434 /* testView.swift in Sources */,
-				43BD50DC29CDCCF100286FA0 /* ModeSelectionView.swift in Sources */,
+				43BD50DC29CDCCF100286FA0 /* PrefrenceView.swift in Sources */,
 				430A445529CC916900652B12 /* ErrorView.swift in Sources */,
 				4322781629E4603D00FFB434 /* PoptoRootMethod.swift in Sources */,
 				430A445329CC8F2300652B12 /* FrameModel.swift in Sources */,

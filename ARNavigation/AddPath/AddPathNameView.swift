@@ -15,6 +15,7 @@ struct AddPathNameView: View {
     @State private var pathName: String = ""
     @State private var pathDescription: String = ""
     @State private var showAlert = false
+    @State private var readytoAutoAdd = false
     @State private var readytoAdd = false
     @AppStorage("addMode") var selectedMode = 0
     @Binding var shouldPresent:Bool
@@ -34,7 +35,8 @@ struct AddPathNameView: View {
                     .background(Color(uiColor: .systemGray6))
                     .cornerRadius(5.0)
                     .padding(20)
-                NavigationLink(destination: AutoAddPathView(pathName: pathName,shouldPresent: $shouldPresent), isActive: $readytoAdd) { EmptyView() }.isDetailLink(false)
+                NavigationLink(destination: AutoAddPathView(pathName: pathName,shouldPresent: $shouldPresent), isActive: $readytoAutoAdd) { EmptyView() }.isDetailLink(false)
+                NavigationLink(destination: AddPathView(pathName: pathName,shouldPresent: $shouldPresent), isActive: $readytoAdd) { EmptyView() }.isDetailLink(false)
                 Button(action: {
                     // TODO: 开始添加路径
                     if checkConflict() || pathName==""
@@ -109,8 +111,14 @@ struct AddPathNameView: View {
         newPath.timestamp = Date()
         do {
             try viewContext.save()
-            readytoAdd = true
+            if selectedMode == 0{
+                readytoAutoAdd = true
+            }
+            else{
+                readytoAdd = true
+            }
         } catch {
+            readytoAutoAdd = false
             readytoAdd = false
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")

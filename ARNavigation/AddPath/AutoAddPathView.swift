@@ -28,7 +28,6 @@ struct AutoAddPathView: View {
     @Binding var shouldPresent:Bool
     
     var body: some View {
-            ZStack{
                 ZStack{
                     AutoAddPathContainer(timer: $timer, stopFlag: $stopFlag, returndata: $displayData , pathLength: $pathLength, timerCounter: $timerCounter, pathName: pathName).edgesIgnoringSafeArea(.all)
                     ZStack{
@@ -75,7 +74,6 @@ struct AutoAddPathView: View {
                     })
                 }
                 .navigationBarBackButtonHidden(true)
-        }
     }
 }
 

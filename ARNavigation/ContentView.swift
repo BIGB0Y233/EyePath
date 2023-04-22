@@ -23,7 +23,11 @@ struct ContentView: View {
         {
             GeometryReader{_ in
                 if myPath.isEmpty{
-                    Text("hhhh").frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    Text("还没有任何路径\n点击右上角“+”号添加路径")
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                        .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
                 else{
                     List {
@@ -40,13 +44,12 @@ struct ContentView: View {
             }
                 .toolbar{
                     ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: ModeSelectionView()) { Label("Preference", systemImage: "line.3.horizontal") }
+                        NavigationLink(destination: PrefrenceView()) { Label("Preference", systemImage: "line.3.horizontal") }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
                     }
                     ToolbarItem {
-                        //NavigationLink(destination: AddPathNameView()) { Label("Add Item", systemImage: "plus") }
                         Button(action: {
                             shouldPresent = true
                         }) {
