@@ -10,11 +10,15 @@ import SwiftUI
 @main
 struct ARNavigationApp: App {
     let persistenceController = PersistenceController.shared
-
+    @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = true
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            if isFirstLaunch {
+                OnboardingView(isOnboarding: $isFirstLaunch)
+            } else {
+                ContentView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
         }
     }
 }

@@ -41,7 +41,7 @@
 		430A445529CC916900652B12 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A445429CC916900652B12 /* ErrorView.swift */; };
 		430A445729CC96C900652B12 /* ImageTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A445629CC96C900652B12 /* ImageTool.swift */; };
 		4322781629E4603D00FFB434 /* PoptoRootMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322781529E4603D00FFB434 /* PoptoRootMethod.swift */; };
-		4322781829F1485000FFB434 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4322781729F1485000FFB434 /* testView.swift */; };
+		4361EF2629F50C3500CCC7ED /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361EF2529F50C3500CCC7ED /* OnboardingView.swift */; };
 		438695A429B87B5600A4E59C /* ARNavigationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A329B87B5600A4E59C /* ARNavigationApp.swift */; };
 		438695A629B87B5600A4E59C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695A529B87B5600A4E59C /* Persistence.swift */; };
 		438695A929B87B5600A4E59C /* ARNavigation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 438695A729B87B5600A4E59C /* ARNavigation.xcdatamodeld */; };
@@ -57,10 +57,13 @@
 		438695EE29B885B400A4E59C /* soundProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695DD29B885B400A4E59C /* soundProcess.swift */; };
 		438695F329B885B400A4E59C /* AddPathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695E329B885B400A4E59C /* AddPathContainer.swift */; };
 		438695F429B885B400A4E59C /* AddPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438695E429B885B400A4E59C /* AddPathView.swift */; };
+		438AEC3229F3B711006FB578 /* CameraPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 438AEC3129F3B711006FB578 /* CameraPermission */; };
+		438AEC3429F3B711006FB578 /* LocationWhenInUsePermission in Frameworks */ = {isa = PBXBuildFile; productRef = 438AEC3329F3B711006FB578 /* LocationWhenInUsePermission */; };
 		43BD50D029CD488600286FA0 /* AutoAddPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50CF29CD488600286FA0 /* AutoAddPathView.swift */; };
 		43BD50D229CD4BE900286FA0 /* AutoAddPathContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50D129CD4BE900286FA0 /* AutoAddPathContainer.swift */; };
 		43BD50D829CDA3F000286FA0 /* pointer.reality in Resources */ = {isa = PBXBuildFile; fileRef = 43BD50D729CDA3F000286FA0 /* pointer.reality */; };
 		43BD50DC29CDCCF100286FA0 /* PrefrenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50DB29CDCCF100286FA0 /* PrefrenceView.swift */; };
+		43C3CCD429F4D5AA00097825 /* PermissionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3CCD329F4D5AA00097825 /* PermissionsListView.swift */; };
 		43F98E3729CC9D240033D1BD /* 直行.wav in Resources */ = {isa = PBXBuildFile; fileRef = 43F98E3629CC9D240033D1BD /* 直行.wav */; };
 /* End PBXBuildFile section */
 
@@ -115,7 +118,7 @@
 		430A445429CC916900652B12 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		430A445629CC96C900652B12 /* ImageTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTool.swift; sourceTree = "<group>"; };
 		4322781529E4603D00FFB434 /* PoptoRootMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoptoRootMethod.swift; sourceTree = "<group>"; };
-		4322781729F1485000FFB434 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
+		4361EF2529F50C3500CCC7ED /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		4363453A29C1800A00ACFA23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		438695A029B87B5600A4E59C /* EyePath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyePath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		438695A329B87B5600A4E59C /* ARNavigationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationApp.swift; sourceTree = "<group>"; };
@@ -141,6 +144,7 @@
 		43BD50D129CD4BE900286FA0 /* AutoAddPathContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAddPathContainer.swift; sourceTree = "<group>"; };
 		43BD50D729CDA3F000286FA0 /* pointer.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = pointer.reality; sourceTree = "<group>"; };
 		43BD50DB29CDCCF100286FA0 /* PrefrenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefrenceView.swift; sourceTree = "<group>"; };
+		43C3CCD329F4D5AA00097825 /* PermissionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsListView.swift; sourceTree = "<group>"; };
 		43F98E3629CC9D240033D1BD /* 直行.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "直行.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				438AEC3229F3B711006FB578 /* CameraPermission in Frameworks */,
+				438AEC3429F3B711006FB578 /* LocationWhenInUsePermission in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +268,8 @@
 				438695A529B87B5600A4E59C /* Persistence.swift */,
 				438695AA29B87B5600A4E59C /* ContentView.swift */,
 				43BD50DB29CDCCF100286FA0 /* PrefrenceView.swift */,
+				43C3CCD329F4D5AA00097825 /* PermissionsListView.swift */,
+				4361EF2529F50C3500CCC7ED /* OnboardingView.swift */,
 				4363453A29C1800A00ACFA23 /* Info.plist */,
 				438695AC29B87B5800A4E59C /* Assets.xcassets */,
 				438695AE29B87B5800A4E59C /* ARNavigation.entitlements */,
@@ -328,7 +336,6 @@
 				43BD50CF29CD488600286FA0 /* AutoAddPathView.swift */,
 				438695E429B885B400A4E59C /* AddPathView.swift */,
 				430A441029C84F3700652B12 /* AddPathNameView.swift */,
-				4322781729F1485000FFB434 /* testView.swift */,
 			);
 			path = AddPath;
 			sourceTree = "<group>";
@@ -349,6 +356,10 @@
 			dependencies = (
 			);
 			name = EyePath;
+			packageProductDependencies = (
+				438AEC3129F3B711006FB578 /* CameraPermission */,
+				438AEC3329F3B711006FB578 /* LocationWhenInUsePermission */,
+			);
 			productName = ARNavigation;
 			productReference = 438695A029B87B5600A4E59C /* EyePath.app */;
 			productType = "com.apple.product-type.application";
@@ -421,6 +432,9 @@
 				Base,
 			);
 			mainGroup = 4386959729B87B5600A4E59C;
+			packageReferences = (
+				438AEC3029F3B711006FB578 /* XCRemoteSwiftPackageReference "PermissionsKit" */,
+			);
 			productRefGroup = 438695A129B87B5600A4E59C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -491,7 +505,6 @@
 				438695E829B885B400A4E59C /* compareView.swift in Sources */,
 				430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */,
 				430A445729CC96C900652B12 /* ImageTool.swift in Sources */,
-				4322781829F1485000FFB434 /* testView.swift in Sources */,
 				43BD50DC29CDCCF100286FA0 /* PrefrenceView.swift in Sources */,
 				430A445529CC916900652B12 /* ErrorView.swift in Sources */,
 				4322781629E4603D00FFB434 /* PoptoRootMethod.swift in Sources */,
@@ -500,7 +513,9 @@
 				430A445029CC8F1300652B12 /* CameraError.swift in Sources */,
 				43BD50D029CD488600286FA0 /* AutoAddPathView.swift in Sources */,
 				430A441829C9514200652B12 /* Path+CoreDataClass.swift in Sources */,
+				4361EF2629F50C3500CCC7ED /* OnboardingView.swift in Sources */,
 				438695EB29B885B400A4E59C /* ARViewContainer.swift in Sources */,
+				43C3CCD429F4D5AA00097825 /* PermissionsListView.swift in Sources */,
 				430A441B29C966EB00652B12 /* PathDetailView.swift in Sources */,
 				438695ED29B885B400A4E59C /* BlurView.swift in Sources */,
 				438695E929B885B400A4E59C /* arViewer.swift in Sources */,
@@ -674,8 +689,6 @@
 				INFOPLIST_FILE = ARNavigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = EyePath;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
-				INFOPLIST_KEY_NSCameraUsageDescription = "AR导航需要使用您的摄像头";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "AR导航需要获取您的位置";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -719,8 +732,6 @@
 				INFOPLIST_FILE = ARNavigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = EyePath;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
-				INFOPLIST_KEY_NSCameraUsageDescription = "AR导航需要使用您的摄像头";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "AR导航需要获取您的位置";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -878,6 +889,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		438AEC3029F3B711006FB578 /* XCRemoteSwiftPackageReference "PermissionsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/PermissionsKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		438AEC3129F3B711006FB578 /* CameraPermission */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 438AEC3029F3B711006FB578 /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = CameraPermission;
+		};
+		438AEC3329F3B711006FB578 /* LocationWhenInUsePermission */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 438AEC3029F3B711006FB578 /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = LocationWhenInUsePermission;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		438695A729B87B5600A4E59C /* ARNavigation.xcdatamodeld */ = {
