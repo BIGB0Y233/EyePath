@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import AudioToolbox
-
 
 struct PrefrenceView: View {
     @AppStorage("addMode") var selectedMode = 0
