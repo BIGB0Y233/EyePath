@@ -17,7 +17,7 @@ struct PermissionsListView: View {
     
     var body: some View {
         VStack{
-        Text("权限获取").font(.largeTitle).padding()
+        Text("权限获取").font(.largeTitle).fontWeight(.bold).padding()
         List {
             Section(header: Text("Location"),footer: Text("需要位置信息来确定您的位置和方向。")) {
                 HStack{
@@ -39,7 +39,7 @@ struct PermissionsListView: View {
                         .frame(width: 30, height: 30)
                         .scaledToFit()
                     Button(action: {
-                        requestLocationPermission()
+                        requestCameraPermission()
                     }) {
                         Text("获取摄像头权限").foregroundColor(.accentColor)
                     }
@@ -91,18 +91,4 @@ struct PermissionsListView: View {
 //        PermissionsListView()
 //    }
 //}
-//
-//
-//
-//VStack(spacing: 20) {
-//    Image(systemName: "book.circle.fill")
-//        .font(.system(size: 150))
-//    Text("Welcome to my app!")
-//        .font(.title)
-//    Text("This app is designed to help you do amazing things. Let's get started!")
-//        .multilineTextAlignment(.center)
-//        .padding()
-//
-//
-//}
-//.padding()
+

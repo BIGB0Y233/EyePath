@@ -15,7 +15,7 @@ struct OnboardingView: View {
                 TabView{
                         OnboardingStepView(imageName: "ill1", title: "Step 1：路线制作", description: "制作路线时，\n手持设备从起点走到终点。")
                     
-                    OnboardingStepView(imageName: "ill2", title: "Step 2:导航", description: "回到起点，开始导航！")
+                    OnboardingStepView(imageName: "ill2", title: "Step 2：导航", description: "回到起点，开始导航！")
                     PermissionsListView(isOnboarding: $isOnboarding)
                 }
                 .tabViewStyle(PageTabViewStyle())

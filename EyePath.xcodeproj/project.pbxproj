@@ -7,22 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		430A437C29C6DF6A00652B12 /* 米.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436A29C6DF6A00652B12 /* 米.wav */; };
-		430A437D29C6DF6A00652B12 /* 右转.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436B29C6DF6A00652B12 /* 右转.wav */; };
-		430A437E29C6DF6A00652B12 /* 一.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436C29C6DF6A00652B12 /* 一.wav */; };
-		430A437F29C6DF6A00652B12 /* 七.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436D29C6DF6A00652B12 /* 七.wav */; };
-		430A438029C6DF6A00652B12 /* 六.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436E29C6DF6A00652B12 /* 六.wav */; };
-		430A438129C6DF6A00652B12 /* 靠近.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A436F29C6DF6A00652B12 /* 靠近.wav */; };
-		430A438229C6DF6A00652B12 /* 继续直行.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437029C6DF6A00652B12 /* 继续直行.wav */; };
-		430A438329C6DF6A00652B12 /* 八.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437129C6DF6A00652B12 /* 八.wav */; };
-		430A438429C6DF6A00652B12 /* 前方.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437229C6DF6A00652B12 /* 前方.wav */; };
-		430A438529C6DF6A00652B12 /* 二.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437329C6DF6A00652B12 /* 二.wav */; };
-		430A438629C6DF6A00652B12 /* 十.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437429C6DF6A00652B12 /* 十.wav */; };
-		430A438829C6DF6A00652B12 /* 五.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437629C6DF6A00652B12 /* 五.wav */; };
-		430A438929C6DF6A00652B12 /* 左转.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437729C6DF6A00652B12 /* 左转.wav */; };
-		430A438B29C6DF6A00652B12 /* 三.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437929C6DF6A00652B12 /* 三.wav */; };
-		430A438C29C6DF6A00652B12 /* 四.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437A29C6DF6A00652B12 /* 四.wav */; };
-		430A438D29C6DF6A00652B12 /* 九.wav in Resources */ = {isa = PBXBuildFile; fileRef = 430A437B29C6DF6A00652B12 /* 九.wav */; };
 		430A441129C84F3700652B12 /* AddPathNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441029C84F3700652B12 /* AddPathNameView.swift */; };
 		430A441829C9514200652B12 /* Path+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441629C9514200652B12 /* Path+CoreDataClass.swift */; };
 		430A441929C9514200652B12 /* Path+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430A441729C9514200652B12 /* Path+CoreDataProperties.swift */; };
@@ -64,7 +48,6 @@
 		43BD50D829CDA3F000286FA0 /* pointer.reality in Resources */ = {isa = PBXBuildFile; fileRef = 43BD50D729CDA3F000286FA0 /* pointer.reality */; };
 		43BD50DC29CDCCF100286FA0 /* PrefrenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD50DB29CDCCF100286FA0 /* PrefrenceView.swift */; };
 		43C3CCD429F4D5AA00097825 /* PermissionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3CCD329F4D5AA00097825 /* PermissionsListView.swift */; };
-		43F98E3729CC9D240033D1BD /* 直行.wav in Resources */ = {isa = PBXBuildFile; fileRef = 43F98E3629CC9D240033D1BD /* 直行.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,22 +68,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		430A436A29C6DF6A00652B12 /* 米.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "米.wav"; sourceTree = "<group>"; };
-		430A436B29C6DF6A00652B12 /* 右转.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "右转.wav"; sourceTree = "<group>"; };
-		430A436C29C6DF6A00652B12 /* 一.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "一.wav"; sourceTree = "<group>"; };
-		430A436D29C6DF6A00652B12 /* 七.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "七.wav"; sourceTree = "<group>"; };
-		430A436E29C6DF6A00652B12 /* 六.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "六.wav"; sourceTree = "<group>"; };
-		430A436F29C6DF6A00652B12 /* 靠近.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "靠近.wav"; sourceTree = "<group>"; };
-		430A437029C6DF6A00652B12 /* 继续直行.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "继续直行.wav"; sourceTree = "<group>"; };
-		430A437129C6DF6A00652B12 /* 八.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "八.wav"; sourceTree = "<group>"; };
-		430A437229C6DF6A00652B12 /* 前方.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "前方.wav"; sourceTree = "<group>"; };
-		430A437329C6DF6A00652B12 /* 二.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "二.wav"; sourceTree = "<group>"; };
-		430A437429C6DF6A00652B12 /* 十.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "十.wav"; sourceTree = "<group>"; };
-		430A437629C6DF6A00652B12 /* 五.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "五.wav"; sourceTree = "<group>"; };
-		430A437729C6DF6A00652B12 /* 左转.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "左转.wav"; sourceTree = "<group>"; };
-		430A437929C6DF6A00652B12 /* 三.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "三.wav"; sourceTree = "<group>"; };
-		430A437A29C6DF6A00652B12 /* 四.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "四.wav"; sourceTree = "<group>"; };
-		430A437B29C6DF6A00652B12 /* 九.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "九.wav"; sourceTree = "<group>"; };
 		430A441029C84F3700652B12 /* AddPathNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPathNameView.swift; sourceTree = "<group>"; };
 		430A441629C9514200652B12 /* Path+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataClass.swift"; sourceTree = "<group>"; };
 		430A441729C9514200652B12 /* Path+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -145,7 +112,6 @@
 		43BD50D729CDA3F000286FA0 /* pointer.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = pointer.reality; sourceTree = "<group>"; };
 		43BD50DB29CDCCF100286FA0 /* PrefrenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefrenceView.swift; sourceTree = "<group>"; };
 		43C3CCD329F4D5AA00097825 /* PermissionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsListView.swift; sourceTree = "<group>"; };
-		43F98E3629CC9D240033D1BD /* 直行.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "直行.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,30 +141,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		430A436929C6DF6A00652B12 /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				43F98E3629CC9D240033D1BD /* 直行.wav */,
-				430A436A29C6DF6A00652B12 /* 米.wav */,
-				430A436B29C6DF6A00652B12 /* 右转.wav */,
-				430A436C29C6DF6A00652B12 /* 一.wav */,
-				430A436D29C6DF6A00652B12 /* 七.wav */,
-				430A436E29C6DF6A00652B12 /* 六.wav */,
-				430A436F29C6DF6A00652B12 /* 靠近.wav */,
-				430A437029C6DF6A00652B12 /* 继续直行.wav */,
-				430A437129C6DF6A00652B12 /* 八.wav */,
-				430A437229C6DF6A00652B12 /* 前方.wav */,
-				430A437329C6DF6A00652B12 /* 二.wav */,
-				430A437429C6DF6A00652B12 /* 十.wav */,
-				430A437629C6DF6A00652B12 /* 五.wav */,
-				430A437729C6DF6A00652B12 /* 左转.wav */,
-				430A437929C6DF6A00652B12 /* 三.wav */,
-				430A437A29C6DF6A00652B12 /* 四.wav */,
-				430A437B29C6DF6A00652B12 /* 九.wav */,
-			);
-			path = Sounds;
-			sourceTree = "<group>";
-		};
 		430A440F29C8496200652B12 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,7 +202,6 @@
 				430A444B29CC8EFC00652B12 /* Camera */,
 				430A443629CB48FB00652B12 /* ARModel */,
 				430A440F29C8496200652B12 /* DataModel */,
-				430A436929C6DF6A00652B12 /* Sounds */,
 				438695E229B885B400A4E59C /* AddPath */,
 				438695D429B885B400A4E59C /* Navigation */,
 				438695DB29B885B400A4E59C /* Utilities */,
@@ -451,31 +392,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				430A438B29C6DF6A00652B12 /* 三.wav in Resources */,
-				430A438929C6DF6A00652B12 /* 左转.wav in Resources */,
-				43F98E3729CC9D240033D1BD /* 直行.wav in Resources */,
-				430A438C29C6DF6A00652B12 /* 四.wav in Resources */,
-				430A438429C6DF6A00652B12 /* 前方.wav in Resources */,
-				430A438829C6DF6A00652B12 /* 五.wav in Resources */,
-				430A438D29C6DF6A00652B12 /* 九.wav in Resources */,
-				430A438029C6DF6A00652B12 /* 六.wav in Resources */,
 				430A443D29CB48FB00652B12 /* right.reality in Resources */,
-				430A437D29C6DF6A00652B12 /* 右转.wav in Resources */,
 				438695B129B87B5800A4E59C /* Preview Assets.xcassets in Resources */,
 				430A443B29CB48FB00652B12 /* destination.reality in Resources */,
 				43BD50D829CDA3F000286FA0 /* pointer.reality in Resources */,
-				430A437C29C6DF6A00652B12 /* 米.wav in Resources */,
 				438695AD29B87B5800A4E59C /* Assets.xcassets in Resources */,
-				430A437E29C6DF6A00652B12 /* 一.wav in Resources */,
-				430A437F29C6DF6A00652B12 /* 七.wav in Resources */,
-				430A438329C6DF6A00652B12 /* 八.wav in Resources */,
 				430A443E29CB48FB00652B12 /* left.reality in Resources */,
-				430A438229C6DF6A00652B12 /* 继续直行.wav in Resources */,
 				430A444229CC05B100652B12 /* startingpoint.reality in Resources */,
 				430A443C29CB48FB00652B12 /* straight.reality in Resources */,
-				430A438629C6DF6A00652B12 /* 十.wav in Resources */,
-				430A438529C6DF6A00652B12 /* 二.wav in Resources */,
-				430A438129C6DF6A00652B12 /* 靠近.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,13 +606,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ARNavigation/Preview Content\"";
-				DEVELOPMENT_TEAM = 8D99MGNPN4;
+				DEVELOPMENT_TEAM = GZ44K8J8CT;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ARNavigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = EyePath;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要摄像头使用增强现实。";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要您的位置信息来判断位置和方向。";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -704,7 +630,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = xmu.EyePath;
+				PRODUCT_BUNDLE_IDENTIFIER = Yven.EyePath;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -725,13 +651,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ARNavigation/Preview Content\"";
-				DEVELOPMENT_TEAM = 8D99MGNPN4;
+				DEVELOPMENT_TEAM = GZ44K8J8CT;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ARNavigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = EyePath;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要摄像头使用增强现实。";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要您的位置信息来判断位置和方向。";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -747,7 +675,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = xmu.EyePath;
+				PRODUCT_BUNDLE_IDENTIFIER = Yven.EyePath;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

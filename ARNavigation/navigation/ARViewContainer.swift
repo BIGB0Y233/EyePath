@@ -49,7 +49,6 @@ struct ARViewContainer: UIViewRepresentable{
         {
             let box = try! ModelEntity.load(named: modelName[i])
             box.position = modelPos[i]
-            
             if i != 0{
                 //以方向角度差旋转模型
                 let delta = (trueNorth[i] - originalNorth + 180).truncatingRemainder(dividingBy: 360) - 180
